@@ -45,7 +45,8 @@ class ViTTrainer:
         progress_bar = tqdm(self.train_loader, desc=f"Epoch {epoch+1}/{self.hyperparams['num_epochs']}", unit="batch")
         
         for inputs, targets in progress_bar:
-            inputs, targets = inputs.to(self.device), targets.to(self.device)
+            inputs = inputs.to(self.device)
+            targets = targets.to(self.device).squeeze().long()
             
             # Forward pass
             self.optimizer.zero_grad()
@@ -74,15 +75,16 @@ class ViTTrainer:
             for inputs, targets in data_loader:
                 inputs = inputs.to(self.device)
                 outputs = self.model(inputs).cpu()
+                targets = targets.cpu()
+                
+                # Process targets
+                targets = targets.squeeze().long()
                 
                 # Process outputs based on task
-                if self.task == 'multi-label, binary-class':
-                    targets = targets.to(torch.float32)
+                if self.task == 'multi-label, binary-class':  
                     outputs = torch.sigmoid(outputs)
                 else:
-                    targets = targets.squeeze().long()
                     outputs = torch.softmax(outputs, dim=-1)
-                    targets = targets.float().reshape(-1, 1)
                 
                 y_true = torch.cat((y_true, targets), 0)
                 y_score = torch.cat((y_score, outputs), 0)
