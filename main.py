@@ -5,9 +5,9 @@ from torch import nn, optim
 from torch.utils.data import DataLoader
 import torchvision.transforms as transforms
 from medmnist import BloodMNIST
-from input_embedding import InputEmbedding
-from encoder_block import EncoderBlock
-from vision_transformer import VisionTransformer
+from encoder/input_embedding.py import InputEmbedding
+from encoder/encoder_block.py import EncoderBlock
+from models/vit.py  import VisionTransformer
 from tqdm import tqdm
 
 # Configure logging
