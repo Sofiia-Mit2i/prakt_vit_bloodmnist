@@ -64,4 +64,4 @@ class InputEmbedding(nn.Module):
       embeddings += self.pos_embedding
             
             # 5. Apply dropout
-            return self.dropout(embeddings)
+      return self.dropout(embeddings)
