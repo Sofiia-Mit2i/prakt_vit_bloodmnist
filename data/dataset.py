@@ -11,10 +11,7 @@ def get_dataloaders(batch_size=32, num_workers=2):
         transform = transforms.Compose([
             # Convert PIL Image/numpy.ndarray to torch.Tensor and scale to [0, 1]
             transforms.ToTensor(),  
-            transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5])  
-                # Normalize tensor values to range [-1, 1] using:
-                # input[channel] = (input[channel] - mean[channel]) / std[channel]
-                # For RGB images 3-channel normalization:
+            transforms.Normalize(mean=[0.5], std=[0.5])  
         ])
         
         # --- Dataset Loading ---
