@@ -15,8 +15,18 @@ def get_dataloaders(batch_size=32, num_workers=2):
         ])
         
         # --- Dataset Loading ---
-        train_dataset = BloodMNIST(split='train', download=True, transform=transform)
-        test_dataset = BloodMNIST(split='test', download=True, transform=transform)
+        train_dataset = BloodMNIST(
+        split='train', 
+        download=True, 
+        transform=transform,
+        target_transform=lambda x: torch.tensor(x).squeeze().long()
+    )
+        test_dataset = BloodMNIST(
+        split='test', 
+        download=True, 
+        transform=transform,
+        target_transform=lambda x: torch.tensor(x).squeeze().long()
+    )
         
         
         
@@ -25,5 +35,9 @@ def get_dataloaders(batch_size=32, num_workers=2):
         train_loader_at_eval = DataLoader(dataset=train_dataset, batch_size=2*batch_size, shuffle=False, num_workers=num_workers)
         test_loader = DataLoader(dataset=test_dataset, batch_size=2*batch_size, shuffle=False, num_workers=num_workers)
 
+# Add this to your dataset loading code
+sample = next(iter(train_loader))
+print("Input shape:", sample[0].shape)  # Should be [B, C, H, W]
+print("Target shape:", sample[1].shape)  # Should be [B]
 
         return train_loader, train_loader_at_eval, test_loader
