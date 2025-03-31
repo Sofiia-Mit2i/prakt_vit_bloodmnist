@@ -3,7 +3,7 @@ from torch.utils.data import DataLoader
 from torchvision import transforms
 from medmnist import BloodMNIST
 
-def get_dataloaders(BATCH_SIZE=32, num_workers=2)
+def get_dataloaders(BATCH_SIZE=32, num_workers=2):
 """
 Creates and returns DataLoaders for the BloodMNIST dataset.
 - batch_size (int): Number of samples per training batch. Default: 32
