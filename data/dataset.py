@@ -7,7 +7,7 @@ Creates and returns DataLoaders for the BloodMNIST dataset.
 - batch_size (int): Number of samples per training batch. Default: 32
 - num_workers (int): Number of subprocesses for data loading. Default: 2
 """
-def get_dataloaders(BATCH_SIZE=32, num_workers=2):
+def get_dataloaders(batch_size=32, num_workers=2):
         transform = transforms.Compose([
             # Convert PIL Image/numpy.ndarray to torch.Tensor and scale to [0, 1]
             transforms.ToTensor(),  
@@ -24,8 +24,9 @@ def get_dataloaders(BATCH_SIZE=32, num_workers=2):
         
         
         # --- DataLoader Configuration ---
-        train_loader = DataLoader(dataset=train_dataset, batch_size=BATCH_SIZE, shuffle=True, num_workers=num_workers)
-        train_loader_at_eval = DataLoader(dataset=train_dataset, batch_size=2*BATCH_SIZE, shuffle=False, num_workers=num_workers)
-        test_loader = DataLoader(dataset=test_dataset, batch_size=2*BATCH_SIZE, shuffle=False, num_workers=num_workers)
+        train_loader = DataLoader(dataset=train_dataset, batch_size=batch_size, shuffle=True, num_workers=num_workers)
+        train_loader_at_eval = DataLoader(dataset=train_dataset, batch_size=2*batch_size, shuffle=False, num_workers=num_workers)
+        test_loader = DataLoader(dataset=test_dataset, batch_size=2*batch_size, shuffle=False, num_workers=num_workers)
+
 
         return train_loader, train_loader_at_eval, test_loader
