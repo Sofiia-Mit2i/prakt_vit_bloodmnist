@@ -5,9 +5,10 @@ from torch import nn, optim
 from torch.utils.data import DataLoader
 import torchvision.transforms as transforms
 from medmnist import BloodMNIST
-from encoder/input_embedding import InputEmbedding
-from encoder/encoder_block import EncoderBlock
-from models/vit  import VisionTransformer
+from encoder.input_embedding import InputEmbedding
+from encoder.encoder_block import EncoderBlock
+from models.vit import VisionTransformer
+from data.dataset import get_dataloaders
 from tqdm import tqdm
 
 # Configure logging
@@ -20,36 +21,6 @@ logging.basicConfig(
     ]
 )
 
-def get_dataloaders(batch_size=32, num_workers=2):
-    """Modified dataset pipeline with error handling"""
-    try:
-        transform = transforms.Compose([
-            transforms.ToTensor(),
-            transforms.Normalize(mean=[0.5], std=[0.5])  # For 3 channels use [0.5]*3
-        ])
-        
-        train_dataset = BloodMNIST(split='train', download=True, transform=transform)
-        test_dataset = BloodMNIST(split='test', download=True, transform=transform)
-        
-        train_loader = DataLoader(
-            train_dataset, 
-            batch_size=batch_size, 
-            shuffle=True,
-            num_workers=num_workers
-        )
-        
-        test_loader = DataLoader(
-            test_dataset, 
-            batch_size=2*batch_size, 
-            shuffle=False,
-            num_workers=num_workers
-        )
-        
-        return train_loader, test_loader
-    
-    except Exception as e:
-        logging.error(f"Error in dataset pipeline: {str(e)}")
-        raise
 
 def train_model():
     # Configuration
