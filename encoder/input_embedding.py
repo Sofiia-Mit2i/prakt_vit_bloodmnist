@@ -38,30 +38,30 @@ class InputEmbedding(nn.Module):
                   
     def forward(self, x):
         """
-            Input: 
-                x - Tensor of shape (batch_size, channels, height, width)           
-            Output:
-                 embeddings - Tensor of shape (batch_size, num_patches+1, latent_size)
+        Input: 
+            x - Tensor of shape (batch_size, channels, height, width)
+        Output:
+            embeddings - Tensor of shape (batch_size, num_patches+1, latent_size)
         """
         batch_size = x.shape[0]
-            
+        
         # 1. Split image into patches
         patches = einops.rearrange(
-                x,
-                "b c (h p1) (w p2) -> b (h w) (p1 p2 c)",
-                p1=self.patch_size,
-                p2=self.patch_size
+            x,
+            "b c (h p1) (w p2) -> b (h w) (p1 p2 c)",
+            p1=self.patch_size,
+            p2=self.patch_size
         )
-            
+        
         # 2. Linear projection of patches
         embeddings = self.patch_embedding(patches)  # (b, n_patches, latent_size)
-            
+        
         # 3. Add class token to beginning of sequence
         class_tokens = self.class_token.expand(batch_size, -1, -1)
         embeddings = torch.cat([class_tokens, embeddings], dim=1)
-            
+        
         # 4. Add positional embeddings
         embeddings += self.pos_embedding
-            
+        
         # 5. Apply dropout
         return self.dropout(embeddings)
