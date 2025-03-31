@@ -1,8 +1,8 @@
 # vision_transformer.py
 import torch
 from torch import nn
-from input_embedding import InputEmbedding
-from encoder_block import EncoderBlock
+from encoder.input_embedding import InputEmbedding
+from encoder.encoder_block import EncoderBlock
 
 class VisionTransformer(nn.Module):
     def __init__(self,
