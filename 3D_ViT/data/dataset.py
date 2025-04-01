@@ -24,8 +24,8 @@ def get_dataloaders(batch_size=16, num_workers=4, prefetch_factor=2, pin_memory=
         val_loader = DataLoader(dataset=val_dataset, batch_size=batch_size, shuffle=False, num_workers=num_workers, pin_memory=pin_memory, prefetch_factor=prefetch_factor)
         test_loader = DataLoader(dataset=test_dataset, batch_size=batch_size, shuffle=False, num_workers=num_workers, pin_memory=pin_memory, prefetch_factor=prefetch_factor)
 
-         raw_image = train_dataset[0][0]  # First sample before transformations
-         print("Min:", raw_image.min(), "Max:", raw_image.max())
+        raw_image = train_dataset[0][0]  # First sample before transformations
+        print("Min:", raw_image.min(), "Max:", raw_image.max())
 
 
         # Add this to your dataset loading code
