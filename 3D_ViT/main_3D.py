@@ -21,13 +21,13 @@ def main():
     print("Sample target values:", targets[:5].numpy())  # First 5 targets
 
     # Optionally, visualize a few images (if you have visualization libraries like matplotlib installed)
-    import matplotlib.pyplot as plt
-    grid_size = 4  # A small grid to visualize the first few images
-    fig, axes = plt.subplots(1, grid_size, figsize=(12, 3))
-    for i in range(grid_size):
-        axes[i].imshow(images[i].squeeze().numpy(), cmap='gray')
-        axes[i].axis('off')
-    plt.show()
+#import matplotlib.pyplot as plt
+ #   grid_size = 4  # A small grid to visualize the first few images
+  #  fig, axes = plt.subplots(1, grid_size, figsize=(12, 3))
+   # for i in range(grid_size):
+    #    axes[i].imshow(images[i].squeeze().numpy(), cmap='gray')
+     #   axes[i].axis('off')
+    #plt.show()
 
 if __name__ == "__main__":
     main()
