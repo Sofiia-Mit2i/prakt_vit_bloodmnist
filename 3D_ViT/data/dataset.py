@@ -24,8 +24,13 @@ def get_dataloaders(batch_size=16, num_workers=4, prefetch_factor=2, pin_memory=
         val_loader = DataLoader(dataset=val_dataset, batch_size=batch_size, shuffle=False, num_workers=num_workers, pin_memory=pin_memory, prefetch_factor=prefetch_factor)
         test_loader = DataLoader(dataset=test_dataset, batch_size=batch_size, shuffle=False, num_workers=num_workers, pin_memory=pin_memory, prefetch_factor=prefetch_factor)
 
-        raw_image = train_dataset[0][0]  # First sample before transformations
-        print("Min:", raw_image.min(), "Max:", raw_image.max())
+        data_iter = iter(train_loader)  # Convert DataLoader into an iterator
+        images, labels = next(data_iter)
+        print("Images shape:", images.shape)  # Expected: (batch_size, C, D, H, W) for 3D
+        print("Labels shape:", labels.shape)  # Expected: (batch_size,)
+        print("Min pixel value:", images.min().item(), "Max pixel value:", images.max().item())
+        print("Sample labels:", labels[:5])  # First 5 labels
+
 
 
         # Add this to your dataset loading code
