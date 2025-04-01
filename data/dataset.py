@@ -46,4 +46,7 @@ def get_dataloaders(batch_size=32, num_workers=2):
         print("===================")
         print(train_loader)
 
+        train_dataset.montage(length=1)
+        train_dataset.montage(length=10)
+
         return train_loader, train_loader_at_eval, test_loader
