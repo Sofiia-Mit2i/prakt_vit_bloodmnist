@@ -47,10 +47,10 @@ def get_dataloaders(batch_size=16, num_workers=4, prefetch_factor=2, pin_memory=
             average_pixel_value = total_sum / total_count
         
             # Print results
-            print("Overall Min Pixel Value:", min_pixel_value)
-            print("Overall Max Pixel Value:", max_pixel_value)
-            print("Overall Average Pixel Value:", average_pixel_value)
-            print("Sample labels:", labels[:5])  # First 5 labels
+        print("Overall Min Pixel Value:", min_pixel_value)
+        print("Overall Max Pixel Value:", max_pixel_value)
+        print("Overall Average Pixel Value:", average_pixel_value)
+        print("Sample labels:", labels[:5])  # First 5 labels
 
 
 
