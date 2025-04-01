@@ -86,16 +86,25 @@ class ViTTrainer:
                 else:
                     outputs = torch.softmax(outputs, dim=-1)
                 
-                y_true = torch.cat((y_true, targets), 0)
-                y_score = torch.cat((y_score, outputs), 0)
+                 y_true.extend(targets.numpy())
+                 y_score.extend(outputs.numpy())
+    
+            # Convert to numpy arrays
+            y_true = np.array(y_true)
+            y_score = np.array(y_score)
         
-        # Convert to numpy and evaluate
-        y_true = y_true.numpy()
-        y_score = y_score.numpy()
+            # Compute metrics
+            if self.task == 'multi-label, binary-class':
+                auc_score = roc_auc_score(y_true, y_score, average='macro')
+            else:
+                auc_score = roc_auc_score(y_true, y_score, multi_class='ovr', average='macro')
         
+            acc_score = accuracy_score(y_true, np.argmax(y_score, axis=1))
         
-        logger.info(f"{split.upper()}  AUC: {metrics[0]:.3f}  ACC: {metrics[1]:.3f}")
-        return metrics
+            metrics = (auc_score, acc_score)  # Fix: Defining `metrics` properly
+        
+            logger.info(f"{split.upper()}  AUC: {metrics[0]:.3f}  ACC: {metrics[1]:.3f}")
+            return metrics
 
     def save_checkpoint(self, metrics):
         if metrics[0] > self.best_metrics['auc']:
