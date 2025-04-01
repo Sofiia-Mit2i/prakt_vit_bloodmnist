@@ -9,8 +9,7 @@ def get_dataloaders(batch_size=16, num_workers=4, prefetch_factor=2, pin_memory=
             transforms.Lambda(lambda x: torch.tensor(x).float().unsqueeze(0)),  
             transforms.Normalize(mean=[0.5], std=[0.5])  
         ])
-""" batch_size reduziert, Prefetching & pinned memory: Improve data loading speed. """
-        
+#batch_size reduziert, Prefetching & pinned memory: Improve data loading speed. 
         # --- Dataset Loading ---
         train_dataset = FractureMNIST3D(split='train', download=True, transform=transform, target_transform=lambda x: torch.tensor(x).squeeze().long())
 #a validation set added (MedMNIST has a predefined val split). 
@@ -18,7 +17,7 @@ def get_dataloaders(batch_size=16, num_workers=4, prefetch_factor=2, pin_memory=
         test_dataset = FractureMNIST3D(split='test', download=True, transform=transform, target_transform=lambda x: torch.tensor(x).squeeze().long())
         
         # --- DataLoader Configuration ---
-""" kein 2*batch_size mehr, wegen memory issues """
+#kein 2*batch_size mehr, wegen memory issues 
         train_loader = DataLoader(dataset=train_dataset, batch_size=batch_size, shuffle=True, num_workers=num_workers, pin_memory=pin_memory, prefetch_factor=prefetch_factor)
         train_loader_at_eval = DataLoader(dataset=train_dataset, batch_size=batch_size, shuffle=False, num_workers=num_workers, pin_memory=pin_memory, prefetch_factor=prefetch_factor)
         val_loader = DataLoader(dataset=val_dataset, batch_size=batch_size, shuffle=False, num_workers=num_workers, pin_memory=pin_memory, prefetch_factor=prefetch_factor)
