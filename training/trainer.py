@@ -86,8 +86,8 @@ class ViTTrainer:
                 else:
                     outputs = torch.softmax(outputs, dim=-1)
                 
-                y_true.extend(targets.numpy())
-                y_score.extend(outputs.numpy())
+                y_true.extend(targets.numpy().tolist())
+                y_score.extend(outputs.numpy().tolist())
     
             # Convert to numpy arrays
             y_true = np.array(y_true)
@@ -101,7 +101,7 @@ class ViTTrainer:
         
             acc_score = accuracy_score(y_true, np.argmax(y_score, axis=1))
         
-            metrics = (auc_score, acc_score)  # Fix: Defining `metrics` properly
+            metrics = (auc_score, acc_score) 
         
             logger.info(f"{split.upper()}  AUC: {metrics[0]:.3f}  ACC: {metrics[1]:.3f}")
             return metrics
