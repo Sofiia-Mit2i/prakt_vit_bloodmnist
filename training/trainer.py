@@ -86,8 +86,8 @@ class ViTTrainer:
                 else:
                     outputs = torch.softmax(outputs, dim=-1)
                 
-                 y_true.extend(targets.numpy())
-                 y_score.extend(outputs.numpy())
+                y_true.extend(targets.numpy())
+                y_score.extend(outputs.numpy())
     
             # Convert to numpy arrays
             y_true = np.array(y_true)
