@@ -7,7 +7,7 @@ from medmnist import FractureMNIST3D
 def get_dataloaders(batch_size=16, num_workers=4, prefetch_factor=2, pin_memory=True):
 
         transform = transforms.Compose([
-            transforms.ToTensor(), 
+            transforms.Lambda(lambda x: torch.tensor(x).float().unsqueeze(0)), 
             #transforms.Normalize(mean=[0.5], std=[0.5])  
         ])
 #batch_size reduziert, Prefetching & pinned memory: Improve data loading speed. 
