@@ -1,4 +1,5 @@
 import torch
+from data.dataset import get_dataloaders
 
 def main():
     # Set the batch size
