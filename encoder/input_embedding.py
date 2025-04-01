@@ -16,8 +16,11 @@ class InputEmbedding(nn.Module):
 
         # Calculate number of patches
         self.num_patches = (image_size // patch_size) ** 2
+        print(num_patches)
         self.patch_size = patch_size
+        print(patch_size)
         self.latent_size = latent_size
+        print(latent_size)
         
         # 1. Patch Embedding Projection
         self.patch_embedding = nn.Linear(
