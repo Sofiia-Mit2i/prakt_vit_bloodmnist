@@ -64,15 +64,5 @@ class VisionTransformer(nn.Module):
         # 3. Extract class token (first in sequence)
         cls_token = x[:, 0]  # (B, latent_size)
 
-        print(image_tensor1.size())
-        image_tensor1_vit = image_tensor1.unsqueeze(0)
-        image_tensor2_vit = image_tensor2.unsqueeze(0)
-        image_tensor = torch.cat((image_tensor1_vit, image_tensor2_vit), dim = 0)
-        
-        vit_output = model(image_tensor)
-        
-        print(vit_output)
-        print(vit_output.size())
-
         # 4. Classify using final features
         return self.classifier(cls_token)
