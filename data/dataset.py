@@ -39,5 +39,11 @@ def get_dataloaders(batch_size=32, num_workers=2):
         sample = next(iter(train_loader))
         print("Input shape:", sample[0].shape)  # Should be [B, C, H, W]
         print("Target shape:", sample[1].shape)  # Should be [B]
+        
+        print(train_dataset)
+        print("===================")
+        print(test_dataset)
+        print("===================")
+        print(train_loader)
 
         return train_loader, train_loader_at_eval, test_loader
