@@ -4,6 +4,10 @@ import numpy as np
 from tqdm import tqdm
 from torch import nn, optim
 
+import medmnist
+from medmnist import INFO, Evaluator
+
+
 logger = logging.getLogger(__name__)
 
 class ViTTrainer:
@@ -74,11 +78,13 @@ class ViTTrainer:
         with torch.no_grad():
             for inputs, targets in data_loader:
                 inputs = inputs.to(self.device)
+                print(inputs.shape)
+                print(inputs.size())
                 outputs = self.model(inputs).cpu()
-                targets = targets.cpu()
+                print(outputs.size())
+                targets = targets.cpu().squeeze().long()
+                print(targets.size())
                 
-                # Process targets
-                targets = targets.squeeze().long()
                 
                 # Process outputs based on task
                 if self.task == 'multi-label, binary-class':  
@@ -93,24 +99,23 @@ class ViTTrainer:
             y_true = np.array(y_true)
             y_score = np.array(y_score)
         
-            # Compute metrics
-            if self.task == 'multi-label, binary-class':
-                auc_score = roc_auc_score(y_true, y_score, average='macro')
-            else:
-                auc_score = roc_auc_score(y_true, y_score, multi_class='ovr', average='macro')
+            # MedMNIST Evaluator
+            evaluator = Evaluator(self.data_flag, split)
+            metrics = evaluator.evaluate(y_score)
+
+            # Extract metrics
+            auc_score, acc_score = metrics['auc'], metrics['acc']
         
-            acc_score = accuracy_score(y_true, np.argmax(y_score, axis=1))
-        
-            metrics = (auc_score, acc_score) 
-        
-            logger.info(f"{split.upper()}  AUC: {metrics[0]:.3f}  ACC: {metrics[1]:.3f}")
-            return metrics
+            logger.info(f"{split.upper()}  AUC: {auc_score:.3f}  ACC: {acc_score:.3f}")
+            return auc_score, acc_score
 
     def save_checkpoint(self, metrics):
-        if metrics[0] > self.best_metrics['auc']:
-            self.best_metrics = {'auc': metrics[0], 'acc': metrics[1]}
+        """Save model checkpoint if AUC improves"""
+        auc_score, acc_score = metrics
+        if auc_score > self.best_metrics['auc']:
+            self.best_metrics = {'auc': auc_score, 'acc': acc_score}
             torch.save(self.model.state_dict(), "best_model.pth")
-            logger.info(f"New best model saved with AUC: {metrics[0]:.3f}, ACC: {metrics[1]:.3f}")
+            logger.info(f"New best model saved with AUC: {auc_score:.3f}, ACC: {acc_score:.3f}")
 
     def train(self):
         try:
