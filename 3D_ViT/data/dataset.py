@@ -30,15 +30,27 @@ def get_dataloaders(batch_size=16, num_workers=4, prefetch_factor=2, pin_memory=
         print("Labels shape:", labels.shape)  # Expected: (batch_size,)
         min_pixel_value = float('inf')
         max_pixel_value = float('-inf')
+        total_sum = 0  # Sum of all pixel values
+        total_count = 0  # Total number of pixels
         for images, _ in train_loader:
-            batch_min = images.min().item()  # Get min value in the current batch
-            batch_max = images.max().item()  # Get max value in the current batch
-
+            batch_min = images.min().item()  # Min value in batch
+            batch_max = images.max().item()  # Max value in batch
+    
             min_pixel_value = min(min_pixel_value, batch_min)
             max_pixel_value = max(max_pixel_value, batch_max)
-        print("Overall Min Pixel Value:", min_pixel_value)
-        print("Overall Max Pixel Value:", max_pixel_value)
-        print("Sample labels:", labels[:5])  # First 5 labels
+
+            # Compute sum and count for average calculation
+            total_sum += images.sum().item()
+            total_count += images.numel()
+
+            # Compute the average pixel value
+            average_pixel_value = total_sum / total_count
+        
+            # Print results
+            print("Overall Min Pixel Value:", min_pixel_value)
+            print("Overall Max Pixel Value:", max_pixel_value)
+            print("Overall Average Pixel Value:", average_pixel_value)
+            print("Sample labels:", labels[:5])  # First 5 labels
 
 
 
