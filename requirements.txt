@@ -1,7 +1,6 @@
-torch
-torchvision
-medmnist
-einops
-numpy
-logging
-tqdm
+torch==2.6.0
+torchvision==0.21.0
+medmnist==3.0.2
+einops==0.8.1
+numpy==1.26.4
+tqdm==4.67.1
