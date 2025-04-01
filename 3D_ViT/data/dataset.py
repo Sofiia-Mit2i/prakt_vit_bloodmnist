@@ -13,25 +13,25 @@ def get_dataloaders(batch_size=16, num_workers=4, prefetch_factor=2, pin_memory=
         
         # --- Dataset Loading ---
         train_dataset = FractureMNIST3D(
-                split='train', 
-                download=True, 
-                transform=transform,
-                target_transform=lambda x: torch.tensor(x).squeeze().long()
-                )
+            split='train', 
+            download=True, 
+            transform=transform,
+            target_transform=lambda x: torch.tensor(x).squeeze().long()
+        )
 """ a validation set added (MedMNIST has a predefined val split). """
         val_dataset = FractureMNIST3D(
-                split='val', 
-                download=True, 
-                transform=transform,
-                target_transform=lambda x: torch.tensor(x).squeeze().long()
-                )
+            split='val', 
+            download=True, 
+            transform=transform,
+            target_transform=lambda x: torch.tensor(x).squeeze().long()
+        )
 
         test_dataset = FractureMNIST3D(
-                split='test', 
-                download=True, 
-                transform=transform,
-                target_transform=lambda x: torch.tensor(x).squeeze().long()
-                )
+            split='test', 
+            download=True, 
+            transform=transform,
+            target_transform=lambda x: torch.tensor(x).squeeze().long()
+        )
         
         
         
