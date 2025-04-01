@@ -104,7 +104,7 @@ class ViTTrainer:
             metrics = evaluator.evaluate(y_score)
 
             # Extract metrics
-            auc_score, acc_score = metrics['auc'], metrics['acc']
+            auc_score, acc_score = metrics.AUC, metrics.ACC
         
             logger.info(f"{split.upper()}  AUC: {auc_score:.3f}  ACC: {acc_score:.3f}")
             return auc_score, acc_score
