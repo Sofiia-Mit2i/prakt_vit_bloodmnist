@@ -5,10 +5,20 @@ from torchvision import transforms
 from medmnist import FractureMNIST3D
 
 def get_dataloaders(batch_size=16, num_workers=4, prefetch_factor=2, pin_memory=True):
+        pixel_sum, pixel_sq_sum, num_pixels = 0.0, 0.0, 0
+        for images, _ in train_loader:
+            pixel_sum += images.sum().item()
+            pixel_sq_sum += (images**2).sum().item()
+            num_pixels += images.numel()
+                
+        mean = pixel_sum / num_pixels
+        std = (pixel_sq_sum / num_pixels - mean**2) ** 0.5
+        print("Computed Mean:", mean)
+        print("Computed Std:", std)
 
         transform = transforms.Compose([
             transforms.Lambda(lambda x: torch.tensor(x).float().unsqueeze(0)), 
-            #transforms.Normalize(mean=[0.5], std=[0.5])  
+            transforms.Normalize(mean=[mean], std=[std])
         ])
 #batch_size reduziert, Prefetching & pinned memory: Improve data loading speed. 
         # --- Dataset Loading ---
