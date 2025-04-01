@@ -4,3 +4,6 @@ medmnist==3.0.2
 einops==0.8.1
 numpy==1.26.4
 tqdm==4.67.1
+
+#for 3D
+nibabel==5.3.2
