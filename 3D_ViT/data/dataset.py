@@ -28,7 +28,16 @@ def get_dataloaders(batch_size=16, num_workers=4, prefetch_factor=2, pin_memory=
         images, labels = next(data_iter)
         print("Images shape:", images.shape)  # Expected: (batch_size, C, D, H, W) for 3D
         print("Labels shape:", labels.shape)  # Expected: (batch_size,)
-        print("Min pixel value:", images.min().item(), "Max pixel value:", images.max().item())
+        min_pixel_value = float('inf')
+        max_pixel_value = float('-inf')
+        for images, _ in train_loader:
+            batch_min = images.min().item()  # Get min value in the current batch
+            batch_max = images.max().item()  # Get max value in the current batch
+
+            min_pixel_value = min(min_pixel_value, batch_min)
+            max_pixel_value = max(max_pixel_value, batch_max)
+        print("Overall Min Pixel Value:", min_pixel_value)
+        print("Overall Max Pixel Value:", max_pixel_value)
         print("Sample labels:", labels[:5])  # First 5 labels
 
 
