@@ -5,9 +5,12 @@ from torchvision import transforms
 from medmnist import FractureMNIST3D
 
 def get_dataloaders(batch_size=16, num_workers=4, prefetch_factor=2, pin_memory=True):
+        raw_image = dataset[0][0]  # First sample before transformations
+        print("Min:", raw_image.min(), "Max:", raw_image.max())
+
         transform = transforms.Compose([
-            transforms.Lambda(lambda x: torch.tensor(x).float().unsqueeze(0)),  
-            #transforms.Normalize(mean=[0.5], std=[0.5])  
+            lambda x: torch.tensor(x).float() / 255.0,  
+            transforms.Normalize(mean=[0.5], std=[0.5])  
         ])
 #batch_size reduziert, Prefetching & pinned memory: Improve data loading speed. 
         # --- Dataset Loading ---
