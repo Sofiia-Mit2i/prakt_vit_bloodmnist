@@ -93,10 +93,6 @@ class ViTTrainer:
         y_true = y_true.numpy()
         y_score = y_score.numpy()
         
-        # Assuming Evaluator class is implemented elsewhere
-        from evaluation.evaluator import Evaluator  # Update with your actual import
-        evaluator = Evaluator(self.data_flag, split)
-        metrics = evaluator.evaluate(y_score)
         
         logger.info(f"{split.upper()}  AUC: {metrics[0]:.3f}  ACC: {metrics[1]:.3f}")
         return metrics
