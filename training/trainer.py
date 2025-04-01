@@ -66,8 +66,8 @@ class ViTTrainer:
     def evaluate(self, split):
         """Evaluate model on specified split"""
         self.model.eval()
-        y_true = torch.tensor([])
-        y_score = torch.tensor([])
+        y_true = []
+        y_score = []
         
         data_loader = self.train_loader_at_eval if split == 'train' else self.test_loader
         
