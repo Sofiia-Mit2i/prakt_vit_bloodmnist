@@ -78,12 +78,12 @@ class ViTTrainer:
         with torch.no_grad():
             for inputs, targets in data_loader:
                 inputs = inputs.to(self.device)
-                print(inputs.shape)
-                print(inputs.size())
+                #print(inputs.shape)
+                #print(inputs.size())
                 outputs = self.model(inputs).cpu()
-                print(outputs.size())
+                #print(outputs.size())
                 targets = targets.cpu().squeeze().long()
-                print(targets.size())
+                #print(targets.size())
                 
                 
                 # Process outputs based on task
