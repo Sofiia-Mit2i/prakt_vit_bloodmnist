@@ -65,4 +65,13 @@ class EncoderBlock(nn.Module):
         # Second residual connection
         x = x + ff_output
 
+        sample1 = train_dataset[0]
+        image_tensor1, label1 = sample1
+        
+        sample2 = train_dataset[0]
+        image_tensor2, label2 = sample2
+        
+        test_encoder = EncoderBlock().to(device)
+        test_encoder(image_tensor1)
+
         return x
