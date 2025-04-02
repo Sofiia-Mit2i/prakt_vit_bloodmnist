@@ -1,8 +1,4 @@
 import torch
-import torch.nn as nn
-import logging
-from torch.optim import Adam
-from torch.utils.data import DataLoader
 from data.dataset import get_dataloaders
 from encoder.input_embedding import InputEmbedding
 from encoder.encoder_block import EncoderBlock
@@ -195,7 +191,4 @@ def main():
         images, targets = sample
     
 if __name__ == "__main__":
-    logging.info("Starting FractureMNIST3D ViT Training Pipeline")
     main()
-    logging.info("Training pipeline execution completed")
-    
