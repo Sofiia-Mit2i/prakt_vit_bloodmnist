@@ -34,7 +34,9 @@ def main():
             'latent_size': 256,
             'num_encoders': 6,
             'num_heads': 8,
-            'dropout': 0.1
+            'dropout': 0.1,
+            'image_size': 28,     
+            'patch_size': 7,
         }
 
         # Get data loaders
@@ -65,8 +67,8 @@ def main():
     
         print("\n=== Testing Input Embedding ===")
         embedder = InputEmbedding(
-            image_size=(28, 28, 28),  # FractureMNIST3D dimensions
-            patch_size=(7, 7, 7),
+            image_size=28,  # FractureMNIST3D dimensions
+            patch_size=7,
             n_channels=1,
             latent_size=256
         )
