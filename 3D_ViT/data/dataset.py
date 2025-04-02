@@ -5,25 +5,11 @@ from torch.utils.data import DataLoader
 from torchvision import transforms
 from medmnist import FractureMNIST3D
 
-#def compute_normalization(dataset):
-    #Compute mean and standard deviation for dataset normalization.
-    #pixel_sum, pixel_sq_sum, num_pixels = 0.0, 0.0, 0
-
-    #loader = DataLoader(dataset, batch_size=16, shuffle=False, num_workers=4)
-    
-    #for images, _ in loader:
-    #    pixel_sum += images.sum().item()
-    #    pixel_sq_sum += (images**2).sum().item()
-    #    num_pixels += images.numel()
-
-    #mean = pixel_sum / num_pixels
-    #std = (pixel_sq_sum / num_pixels - mean**2) ** 0.5
-    #print(f"Computed Mean: {mean}, Computed Std: {std}")
-    
-    #return mean, std
 class ToTensor4D:
     def __call__(self, pic):
         if pic.ndim == 4:
+            return torch.tensor(pic, dtype=torch.float32)
+        elif pic.ndim == 4:
             return torch.tensor(pic, dtype=torch.float32)
         else:
             raise ValueError(f"pic should be 4 dimensional. Got {pic.ndim} dimensions.")
