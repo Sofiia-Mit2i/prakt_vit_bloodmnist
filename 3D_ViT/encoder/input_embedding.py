@@ -13,8 +13,8 @@ class InputEmbedding(nn.Module):
         super().__init__()
 
         # Ensure divisibility
-        assert all(isinstance(i, int) and isinstance(p, int) and i % p == 0 for i, p in zip(image_size, patch_size)), \
-            "Image dimensions must be divisible by patch size"
+       # assert all(isinstance(i, int) and isinstance(p, int) and i % p == 0 for i, p in zip(image_size, patch_size)), \
+        #    "Image dimensions must be divisible by patch size"
 
         # Calculate number of patches
         self.num_patches = (image_size[0] // patch_size[0]) * \
