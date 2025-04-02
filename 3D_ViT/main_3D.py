@@ -86,7 +86,7 @@ def main():
     
     # Check attention mechanism
     print("\nAttention mechanism verification:")
-    attn_output, attn_weights = encoder.attention(encoder.norm1(embeddings)), None
+    attn_output, attn_weights = encoder.attention(encoder.norm1(embeddings), encoder.norm1(embeddings), encoder.norm1(embeddings))
     print("Attention output shape:", attn_output[0].shape if isinstance(attn_output, tuple) else attn_output.shape)
     
     # Verify MLP operations
