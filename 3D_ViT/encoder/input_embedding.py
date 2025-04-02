@@ -4,8 +4,8 @@ import einops
 
 class InputEmbedding(nn.Module):
     def __init__(self, 
-                 image_size=(28, 28, 28)      # (Depth, Height, Width)
-                 patch_size=(7, 7, 7)         # 3D Patch size
+                 image_size=(28, 28, 28),      # (Depth, Height, Width)
+                 patch_size=(7, 7, 7),        # 3D Patch size
                  n_channels=1,         	          # Input channels (Grayscale for FractureMNIST3D)
                  latent_size=256,     
 #Reduce model complexity: Using latent_size=256 (instead of 512) can help reduce computational overhead.
