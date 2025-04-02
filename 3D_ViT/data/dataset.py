@@ -5,7 +5,7 @@ from torchvision import transforms
 from medmnist import FractureMNIST3D
 
 #def compute_normalization(dataset):
-    """Compute mean and standard deviation for dataset normalization."""
+    #Compute mean and standard deviation for dataset normalization.
     #pixel_sum, pixel_sq_sum, num_pixels = 0.0, 0.0, 0
 
     #loader = DataLoader(dataset, batch_size=16, shuffle=False, num_workers=4)
