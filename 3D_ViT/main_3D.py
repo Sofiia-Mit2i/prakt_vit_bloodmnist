@@ -158,7 +158,7 @@ def main():
         trainer = ViTTrainer(
                 model=model,
                 train_loader=train_loader,
-                val_loader=val_loader
+                val_loader=val_loader,
                 test_loader=test_loader,
                 train_loader_at_eval=train_loader_at_eval,
                 device=device,
