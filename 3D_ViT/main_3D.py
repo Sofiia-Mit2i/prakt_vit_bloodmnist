@@ -177,14 +177,14 @@ def main():
         test_acc = trainer.evaluate(test_loader)
         logging.info(f"Final test accuracy: {test_acc:.2f}%")
     
-        except KeyboardInterrupt:
-            logging.warning("Training interrupted by user!")
-        except Exception as e:
-            logging.error(f"Critical error in main execution: {str(e)}", exc_info=True)
-            raise
-        finally:
-            logging.info("Cleaning up resources...")
-            # Add any cleanup code here
+    except KeyboardInterrupt:
+        logging.warning("Training interrupted by user!")
+    except Exception as e:
+        logging.error(f"Critical error in main execution: {str(e)}", exc_info=True)
+        raise
+    finally:
+        logging.info("Cleaning up resources...")
+        # Add any cleanup code here
 
 
 if __name__ == "__main__":
