@@ -1,0 +1,4 @@
+2025-04-02 13:26:11,177 - INFO - Starting BloodMNIST ViT Training Pipeline
+2025-04-02 13:26:11,177 - INFO - Using device: cpu
+2025-04-02 13:26:11,177 - INFO - Initializing data pipelines...
+2025-04-02 13:26:12,832 - ERROR - Main execution failed: too many values to unpack (expected 3)
