@@ -37,10 +37,12 @@ def main():
             'dropout': 0.1
         }
 
-    # Get data loaders
-    logging.info("Initializing data pipelines...")
-    train_loader, train_loader_at_eval, val_loader, test_loader = get_dataloaders(batch_size=hyperparams['batch_size'],
-            num_workers=hyperparams['num_workers'])
+        # Get data loaders
+        logging.info("Initializing data pipelines...")
+        train_loader, train_loader_at_eval, val_loader, test_loader = get_dataloaders(
+            batch_size=hyperparams['batch_size'],
+            num_workers=hyperparams['num_workers']
+        )
 
     # Check the shape of a sample batch from the train_loader
     sample = next(iter(train_loader))
