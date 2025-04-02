@@ -25,8 +25,8 @@ max_val = all_images.max().item()
 mean_val = all_images.mean().item()
 std_val = all_images.std().item()
 median_val = all_images.median().item()
-p25 = torch.quantile(all_images[:1000], 0.25).item()  # Using a subset of the data
-p75 = torch.quantile(all_images[:1000], 0.75).item()
+p25 = torch.quantile(all_images[:500], 0.25).item()  # Using a subset of the data
+p75 = torch.quantile(all_images[:500], 0.75).item()
 
 # Print stats
 print(f"Min: {min_val}, Max: {max_val}")
