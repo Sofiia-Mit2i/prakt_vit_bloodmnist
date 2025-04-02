@@ -29,7 +29,7 @@ class ToTensor4D:
             
 def compute_normalization(dataset):
     loader = DataLoader(dataset, batch_size=16, shuffle=False, num_workers=4)
-    all_images = torch.cat([img.unsqueeze(0) for img, _ in dataset], dim=0)  # Shape: (N, D, H, W)
+    all_images = torch.cat([torch.tensor(img).unsqueeze(0) for img, _ in dataset], dim=0)  # Shape: (N, D, H, W)
 
     # Compute statistics
     min_val = all_images.min().item()
