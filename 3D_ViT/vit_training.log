@@ -127,3 +127,14 @@ Traceback (most recent call last):
     self.pos_embedding = nn.Parameter(torch.randn(1, self.num_patches + 1, latent_size))
 TypeError: randn(): argument 'size' failed to unpack the object at pos 2 with error "type must be tuple of ints,but got float"
 2025-04-02 12:47:53,869 - INFO - Cleaning up resources...
+2025-04-02 13:38:59,083 - INFO - Starting FractureMNIST3D ViT Training Pipeline
+2025-04-02 13:38:59,247 - INFO - Initializing training on device: cpu
+2025-04-02 13:38:59,247 - INFO - Initializing data pipelines...
+2025-04-02 13:39:02,835 - ERROR - Critical error in main execution: randn(): argument 'size' failed to unpack the object at pos 2 with error "type must be tuple of ints,but got float"
+Traceback (most recent call last):
+  File "/home/sophia_iln/prakt_vit_bloodmnist/3D_ViT/main_3D.py", line 71, in main
+    embedder = InputEmbedding(
+  File "/home/sophia_iln/prakt_vit_bloodmnist/3D_ViT/encoder/input_embedding.py", line 40, in __init__
+    self.pos_embedding = nn.Parameter(torch.randn(1, self.num_patches + 1, latent_size))
+TypeError: randn(): argument 'size' failed to unpack the object at pos 2 with error "type must be tuple of ints,but got float"
+2025-04-02 13:39:02,837 - INFO - Cleaning up resources...
