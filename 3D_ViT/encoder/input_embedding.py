@@ -4,8 +4,8 @@ import einops
 
 class InputEmbedding(nn.Module):
     def __init__(self, 
-                 image_size=28,        # (Depth, Height, Width)
-                 patch_size=7,         # 3D Patch size
+                 image_size=(28, 28, 28)      # (Depth, Height, Width)
+                 patch_size=(7, 7, 7)         # 3D Patch size
                  n_channels=1,         	          # Input channels (Grayscale for FractureMNIST3D)
                  latent_size=256,     
 #Reduce model complexity: Using latent_size=256 (instead of 512) can help reduce computational overhead.
@@ -13,11 +13,13 @@ class InputEmbedding(nn.Module):
         super().__init__()
 
         # Ensure divisibility
-       # assert all(isinstance(i, int) and isinstance(p, int) and i % p == 0 for i, p in zip(image_size, patch_size)), \
+        assert all(i % p == 0 for i, p in zip(image_size, patch_size)), \
         #    "Image dimensions must be divisible by patch size"
 
         # Calculate number of patches
-        self.num_patches = (image_size[0] // patch_size[0])
+        self.num_patches = (image_size[0] // patch_size[0]) * \
+                           (image_size[1] // patch_size[1]) * \
+                           (image_size[2] // patch_size[2])
         print(self.num_patches)
         self.patch_size = patch_size
         print(self.patch_size)
