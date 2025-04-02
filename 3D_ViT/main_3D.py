@@ -18,7 +18,7 @@ def main():
 
     # Check some values for transformation correctness
     print("Sample values of the first image batch (normalized):", images[0].squeeze().numpy())
-    print("Sample target values:", targets[:5].numpy())  # First 5 targets
+    print("Sample target values:", targets[:20].numpy())  # First 5 targets
 
     # Optionally, visualize a few images (if you have visualization libraries like matplotlib installed)
 #import matplotlib.pyplot as plt
