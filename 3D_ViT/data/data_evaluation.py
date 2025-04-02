@@ -6,7 +6,15 @@ from torch.utils.data import DataLoader
 from torchvision import transforms
 from medmnist import FractureMNIST3D
 
-dataset = FractureMNIST3D(split='train', transform=transforms.ToTensor(), download=True)
+class ToTensor4D:
+    def __call__(self, pic):
+        if pic.ndim == 4:
+            return torch.tensor(pic, dtype=torch.float32)
+        else:
+            raise ValueError(f"pic should be 4 dimensional. Got {pic.ndim} dimensions.")
+
+
+dataset = FractureMNIST3D(split='train',  transform=ToTensor4D(), download=True)
 # Assuming `dataset` is your FractureMNIST3D dataset
 # Convert all images to a single tensor for global statistics
 all_images = torch.cat([img.unsqueeze(0) for img, _ in dataset], dim=0)  # Shape: (N, D, H, W)
