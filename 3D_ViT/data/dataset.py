@@ -4,44 +4,48 @@ from torch.utils.data import DataLoader
 from torchvision import transforms
 from medmnist import FractureMNIST3D
 
-def compute_normalization(dataset):
+#def compute_normalization(dataset):
     """Compute mean and standard deviation for dataset normalization."""
-    pixel_sum, pixel_sq_sum, num_pixels = 0.0, 0.0, 0
+    #pixel_sum, pixel_sq_sum, num_pixels = 0.0, 0.0, 0
 
-    loader = DataLoader(dataset, batch_size=16, shuffle=False, num_workers=4)
+    #loader = DataLoader(dataset, batch_size=16, shuffle=False, num_workers=4)
     
-    for images, _ in loader:
-        pixel_sum += images.sum().item()
-        pixel_sq_sum += (images**2).sum().item()
-        num_pixels += images.numel()
+    #for images, _ in loader:
+    #    pixel_sum += images.sum().item()
+    #    pixel_sq_sum += (images**2).sum().item()
+    #    num_pixels += images.numel()
 
-    mean = pixel_sum / num_pixels
-    std = (pixel_sq_sum / num_pixels - mean**2) ** 0.5
-    print(f"Computed Mean: {mean}, Computed Std: {std}")
+    #mean = pixel_sum / num_pixels
+    #std = (pixel_sq_sum / num_pixels - mean**2) ** 0.5
+    #print(f"Computed Mean: {mean}, Computed Std: {std}")
     
-    return mean, std
-
-import torch
-from torch.utils.data import DataLoader
-from torchvision import transforms
-from medmnist import FractureMNIST3D
-
+    #return mean, std
+class ToTensor4D:
+    def __call__(self, pic):
+        if pic.ndim == 4:
+            return torch.tensor(pic, dtype=torch.float32)
+        else:
+            raise ValueError(f"pic should be 4 dimensional. Got {pic.ndim} dimensions.")
+            
 def compute_normalization(dataset):
-    """Compute mean and standard deviation for dataset normalization."""
-    pixel_sum, pixel_sq_sum, num_pixels = 0.0, 0.0, 0
-
     loader = DataLoader(dataset, batch_size=16, shuffle=False, num_workers=4)
-    
-    for images, _ in loader:
-        pixel_sum += images.sum().item()
-        pixel_sq_sum += (images**2).sum().item()
-        num_pixels += images.numel()
+    all_images = torch.cat([img.unsqueeze(0) for img, _ in dataset], dim=0)  # Shape: (N, D, H, W)
 
-    mean = pixel_sum / num_pixels
-    std = (pixel_sq_sum / num_pixels - mean**2) ** 0.5
-    print(f"Computed Mean: {mean}, Computed Std: {std}")
+    # Compute statistics
+    min_val = all_images.min().item()
+    max_val = all_images.max().item()
+    mean_val = all_images.mean().item()
+    std_val = all_images.std().item()
+    median_val = all_images.median().item()
+    p25 = torch.quantile(all_images[:500], 0.25).item()  # Using a subset of the data
+    p75 = torch.quantile(all_images[:500], 0.75).item()
     
-    return mean, std
+    # Print stats
+    print(f"Min: {min_val}, Max: {max_val}")
+    print(f"Mean: {mean_val}, Std: {std_val}")
+    print(f"Median: {median_val}, 25th Percentile: {p25}, 75th Percentile: {p75}")
+
+    return mean_val, std_val
 
 def get_dataloaders(batch_size=16, num_workers=4, prefetch_factor=2, pin_memory=True):
     """Loads the FractureMNIST3D dataset and applies computed normalization."""
@@ -50,12 +54,12 @@ def get_dataloaders(batch_size=16, num_workers=4, prefetch_factor=2, pin_memory=
     train_dataset_raw = FractureMNIST3D(split='train', download=True)
     
     # Compute normalization stats
-    mean, std = compute_normalization(train_dataset_raw)
+    mean_val, std_val = compute_normalization(train_dataset_raw)
 
     # --- Define transforms with computed mean & std ---
     transform = transforms.Compose([
         transforms.Lambda(lambda x: torch.tensor(x).float().unsqueeze(0)),  # Convert to tensor and add channel dim
-        transforms.Normalize(mean=[mean], std=[std])  # Normalize using computed values
+        transforms.Normalize(mean=[mean_val], std=[std_val])  # Normalize using computed values
     ])
 
     # --- Load datasets again with transforms ---
