@@ -1,6 +1,7 @@
 import torch
 from data.dataset import get_dataloaders
 from encoder.input_embedding import InputEmbedding
+from enocder.encoder_block import EncoderBlock
 
 def main():
     # Set the batch size
