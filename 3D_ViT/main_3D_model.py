@@ -39,7 +39,7 @@ def main():
     try:
         # Data loading
         logging.info("Initializing data pipelines...")
-        train_loader, train_loader_at_eval, test_loader = get_dataloaders(
+        train_loader, train_loader_at_eval, val_loader, test_loader = get_dataloaders(
             batch_size=hyperparams['batch_size'],
             num_workers=hyperparams['num_workers']
         )
@@ -49,7 +49,7 @@ def main():
         model = VisionTransformer(
             image_size=28,
             patch_size=7,
-            n_channels=3,
+            n_channels=1,
             num_classes=hyperparams['num_classes'],
             latent_size=256,
             num_encoders=6,
