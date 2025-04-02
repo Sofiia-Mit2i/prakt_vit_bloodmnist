@@ -36,3 +36,72 @@
 2025-04-02 13:40:48,376 - INFO - New best model saved with AUC: 0.650, ACC: 0.375
 2025-04-02 13:41:10,761 - INFO - Epoch 4 - Train Loss: 1.0522
 2025-04-02 13:41:12,601 - INFO - TEST  AUC: 0.650  ACC: 0.375
+2025-04-02 14:00:46,137 - INFO - Starting BloodMNIST ViT Training Pipeline
+2025-04-02 14:00:46,138 - INFO - Using device: cpu
+2025-04-02 14:00:46,138 - INFO - Initializing data pipelines...
+2025-04-02 14:00:47,452 - INFO - Building Vision Transformer...
+2025-04-02 14:00:47,477 - INFO - Beginning training process...
+2025-04-02 14:00:47,478 - INFO - Starting training...
+2025-04-02 14:01:05,396 - INFO - Epoch 1 - Train Loss: 1.0645
+2025-04-02 14:01:06,721 - INFO - TEST  AUC: 0.655  ACC: 0.375
+2025-04-02 14:01:06,743 - INFO - New best model saved with AUC: 0.655, ACC: 0.375
+2025-04-02 14:01:28,193 - INFO - Epoch 2 - Train Loss: 1.0293
+2025-04-02 14:01:29,617 - INFO - TEST  AUC: 0.648  ACC: 0.375
+2025-04-02 14:01:49,938 - INFO - Epoch 3 - Train Loss: 1.0301
+2025-04-02 14:01:51,461 - INFO - TEST  AUC: 0.649  ACC: 0.375
+2025-04-02 14:02:15,709 - INFO - Epoch 4 - Train Loss: 1.0172
+2025-04-02 14:02:17,652 - INFO - TEST  AUC: 0.650  ACC: 0.375
+2025-04-02 14:02:42,087 - INFO - Epoch 5 - Train Loss: 1.0283
+2025-04-02 14:02:43,726 - INFO - TEST  AUC: 0.650  ACC: 0.375
+2025-04-02 14:03:03,980 - INFO - Epoch 6 - Train Loss: 1.0131
+2025-04-02 14:03:05,573 - INFO - TEST  AUC: 0.651  ACC: 0.375
+2025-04-02 14:03:27,916 - INFO - Epoch 7 - Train Loss: 1.0179
+2025-04-02 14:03:29,484 - INFO - TEST  AUC: 0.651  ACC: 0.375
+2025-04-02 14:03:50,664 - INFO - Epoch 8 - Train Loss: 1.0070
+2025-04-02 14:03:52,313 - INFO - TEST  AUC: 0.652  ACC: 0.562
+2025-04-02 14:04:12,256 - INFO - Epoch 9 - Train Loss: 1.0388
+2025-04-02 14:04:13,630 - INFO - TEST  AUC: 0.651  ACC: 0.550
+2025-04-02 14:04:33,635 - INFO - Epoch 10 - Train Loss: 1.0039
+2025-04-02 14:04:35,030 - INFO - TEST  AUC: 0.650  ACC: 0.396
+2025-04-02 14:04:55,183 - INFO - Epoch 11 - Train Loss: 0.9970
+2025-04-02 14:04:56,769 - INFO - TEST  AUC: 0.649  ACC: 0.554
+2025-04-02 14:05:16,445 - INFO - Epoch 12 - Train Loss: 0.9797
+2025-04-02 14:05:18,023 - INFO - TEST  AUC: 0.646  ACC: 0.558
+2025-04-02 14:05:26,505 - WARNING - Training interrupted by user
+2025-04-02 14:05:26,510 - INFO - Training process completed successfully
+2025-04-02 14:09:11,138 - INFO - Starting BloodMNIST ViT Training Pipeline
+2025-04-02 14:09:11,139 - INFO - Using device: cpu
+2025-04-02 14:09:11,139 - INFO - Initializing data pipelines...
+2025-04-02 14:09:12,491 - INFO - Building Vision Transformer...
+2025-04-02 14:09:12,517 - INFO - Beginning training process...
+2025-04-02 14:09:12,518 - INFO - Starting training...
+2025-04-02 14:09:30,589 - INFO - Epoch 1 - Train Loss: 1.0543
+2025-04-02 14:09:31,940 - INFO - TEST  AUC: 0.615  ACC: 0.375
+2025-04-02 14:09:31,964 - INFO - New best model saved with AUC: 0.615, ACC: 0.375
+2025-04-02 14:09:56,657 - INFO - Epoch 2 - Train Loss: 1.0694
+2025-04-02 14:09:58,276 - INFO - TEST  AUC: 0.627  ACC: 0.375
+2025-04-02 14:09:58,301 - INFO - New best model saved with AUC: 0.627, ACC: 0.375
+2025-04-02 14:10:20,734 - INFO - Epoch 3 - Train Loss: 1.0249
+2025-04-02 14:10:22,405 - INFO - TEST  AUC: 0.638  ACC: 0.375
+2025-04-02 14:10:22,435 - INFO - New best model saved with AUC: 0.638, ACC: 0.375
+2025-04-02 14:10:46,383 - INFO - Epoch 4 - Train Loss: 1.0438
+2025-04-02 14:10:48,098 - INFO - TEST  AUC: 0.642  ACC: 0.375
+2025-04-02 14:10:48,122 - INFO - New best model saved with AUC: 0.642, ACC: 0.375
+2025-04-02 14:11:13,673 - INFO - Epoch 5 - Train Loss: 1.0226
+2025-04-02 14:11:15,398 - INFO - TEST  AUC: 0.644  ACC: 0.375
+2025-04-02 14:11:15,426 - INFO - New best model saved with AUC: 0.644, ACC: 0.375
+2025-04-02 14:11:41,891 - INFO - Epoch 6 - Train Loss: 1.0095
+2025-04-02 14:11:43,650 - INFO - TEST  AUC: 0.645  ACC: 0.375
+2025-04-02 14:11:43,672 - INFO - New best model saved with AUC: 0.645, ACC: 0.375
+2025-04-02 14:12:04,819 - INFO - Epoch 7 - Train Loss: 0.9943
+2025-04-02 14:12:06,212 - INFO - TEST  AUC: 0.646  ACC: 0.375
+2025-04-02 14:12:06,233 - INFO - New best model saved with AUC: 0.646, ACC: 0.375
+2025-04-02 14:12:29,879 - INFO - Epoch 8 - Train Loss: 1.0112
+2025-04-02 14:12:31,341 - INFO - TEST  AUC: 0.645  ACC: 0.400
+2025-04-02 14:12:55,589 - INFO - Epoch 9 - Train Loss: 1.0204
+2025-04-02 14:12:57,297 - INFO - TEST  AUC: 0.646  ACC: 0.533
+2025-04-02 14:13:22,213 - INFO - Epoch 10 - Train Loss: 1.0095
+2025-04-02 14:13:23,844 - INFO - TEST  AUC: 0.647  ACC: 0.421
+2025-04-02 14:13:23,872 - INFO - New best model saved with AUC: 0.647, ACC: 0.421
+2025-04-02 14:13:27,536 - WARNING - Training interrupted by user
+2025-04-02 14:13:27,542 - INFO - Training process completed successfully
