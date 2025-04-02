@@ -62,7 +62,7 @@ def get_dataloaders(batch_size=16, num_workers=4, prefetch_factor=2, pin_memory=
         ToTensor4D(), #Converts to tensor with ToTensor4D() (shape becomes [D, H, W, C])
       #  transforms.Lambda(lambda x: x.permute(3, 0, 1, 2)), #Uses permute to change to PyTorch's (C, D, H, W) format
        transforms.Normalize(mean=[mean_val], std=[std_val])  # Normalize using computed values
-    #])
+    ])
 
     # --- Load datasets again with transforms ---
     train_dataset = FractureMNIST3D(split='train', download=True, transform=transform)
