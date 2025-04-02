@@ -1,14 +1,46 @@
 import torch
+import torch.nn as nn
+import logging
+from torch.optim import Adam
+from torch.utils.data import DataLoader
 from data.dataset import get_dataloaders
 from encoder.input_embedding import InputEmbedding
 from encoder.encoder_block import EncoderBlock
+from models.vit import VisionTransformer
+from training.trainer import ViTTrainer
+
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler("vit_training.log"),
+        logging.StreamHandler()
+    ]
+)
 
 def main():
-    # Set the batch size
-    batch_size = 16
+    # Configuration
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    logging.info(f"Initializing training on device: {device}")
+     try:
+        # Hyperparameters
+        hyperparams = {
+            'batch_size': 16,
+            'num_workers': 4,
+            'learning_rate': 3e-4,
+            'weight_decay': 1e-4,
+            'num_epochs': 50,
+            'num_classes': 3,  # FractureMNIST3D has 3 classes
+            'latent_size': 256,
+            'num_encoders': 6,
+            'num_heads': 8,
+            'dropout': 0.1
+        }
 
     # Get data loaders
-    train_loader, train_loader_at_eval, val_loader, test_loader = get_dataloaders(batch_size=batch_size)
+    logging.info("Initializing data pipelines...")
+    train_loader, train_loader_at_eval, val_loader, test_loader = get_dataloaders(batch_size=hyperparams['batch_size'],
+            num_workers=hyperparams['num_workers'])
 
     # Check the shape of a sample batch from the train_loader
     sample = next(iter(train_loader))
@@ -103,5 +135,58 @@ def main():
     dummy_loss.backward()
     print("\nGradient flow test completed without errors")
 
+    logging.info("Building Vision Transformer...")
+    model = VisionTransformer(
+            image_size=28,
+            patch_size=7,
+            n_channels=1,  # FractureMNIST3D is grayscale
+            num_classes=hyperparams['num_classes'],
+            latent_size=hyperparams['latent_size'],
+            num_encoders=hyperparams['num_encoders'],
+            num_heads=hyperparams['num_heads'],
+            dropout=hyperparams['dropout']
+        ).to(device)
+
+    logging.debug(f"Model architecture:\n{model}")
+    logging.info(f"Total trainable parameters: {sum(p.numel() for p in model.parameters() if p.requires_grad):,}")
+
+    # Initialize trainer
+    logging.info("Configuring training components...")
+
+    trainer = ViTTrainer(
+            model=model,
+            train_loader=train_loader,
+            val_loader=val_loader
+            test_loader=test_loader,
+            train_loader_at_eval=train_loader_at_eval,
+            device=device,
+            hyperparams=hyperparams,
+            task='multi-class',
+            data_flag='bloodmnist'
+        )
+
+    # Start training
+    logging.info("Commencing training process...")
+    best_val_acc = trainer.train()
+    logging.info(f"Training completed. Best validation accuracy: {best_val_acc:.2f}%")
+
+    # Final evaluation
+    logging.info("Running final evaluation on test set...")
+    test_acc = trainer.evaluate(test_loader)
+    logging.info(f"Final test accuracy: {test_acc:.2f}%")
+
+    except KeyboardInterrupt:
+        logging.warning("Training interrupted by user!")
+    except Exception as e:
+        logging.error(f"Critical error in main execution: {str(e)}", exc_info=True)
+        raise
+    finally:
+        logging.info("Cleaning up resources...")
+        # Add any cleanup code here
+
+
 if __name__ == "__main__":
+    logging.info("Starting FractureMNIST3D ViT Training Pipeline")
     main()
+    logging.info("Training pipeline execution completed")
+    
