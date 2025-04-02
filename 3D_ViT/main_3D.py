@@ -31,8 +31,8 @@ def main():
 
     print("\n=== Testing Input Embedding ===")
     embedder = InputEmbedding(
-        image_size=(28, 28, 28),  # FractureMNIST3D dimensions
-        patch_size=(7, 7, 7),
+        image_size=28,  # FractureMNIST3D dimensions
+        patch_size=7,
         n_channels=1,
         latent_size=256
     )
