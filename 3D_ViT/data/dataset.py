@@ -57,15 +57,15 @@ def get_dataloaders(batch_size=16, num_workers=4, prefetch_factor=2, pin_memory=
     mean_val, std_val = compute_normalization(train_dataset_raw)
 
     # --- Define transforms with computed mean & std ---
-    transform = transforms.Compose([
-        transforms.Lambda(lambda x: torch.tensor(x).float().unsqueeze(0)),  # Convert to tensor and add channel dim
-        transforms.Normalize(mean=[mean_val], std=[std_val])  # Normalize using computed values
-    ])
+   # transform = transforms.Compose([
+    #    transforms.Lambda(lambda x: torch.tensor(x).float().unsqueeze(0)),  # Convert to tensor and add channel dim
+     #   transforms.Normalize(mean=[mean_val], std=[std_val])  # Normalize using computed values
+    #])
 
     # --- Load datasets again with transforms ---
-    train_dataset = FractureMNIST3D(split='train', download=True, transform=transform)
-    val_dataset = FractureMNIST3D(split='val', download=True, transform=transform)
-    test_dataset = FractureMNIST3D(split='test', download=True, transform=transform)
+    train_dataset = FractureMNIST3D(split='train', download=True, transform=ToTensor4D())
+    val_dataset = FractureMNIST3D(split='val', download=True,  transform=ToTensor4D())
+    test_dataset = FractureMNIST3D(split='test', download=True, transform=ToTensor4D())
 
     # --- Create DataLoaders ---
     train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=num_workers, pin_memory=pin_memory, prefetch_factor=prefetch_factor)
