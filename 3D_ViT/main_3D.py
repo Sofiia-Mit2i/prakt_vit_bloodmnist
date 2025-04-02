@@ -59,5 +59,48 @@ def main():
     assert not torch.isinf(embeddings).any(), "Embeddings contain inf values!"
     print("\nEmbedding sanity checks passed!")
 
+    print("\n=== Testing Encoder Block ===")
+    
+    # Initialize encoder block
+    encoder = EncoderBlock(
+        latent_size=256,
+        num_heads=8,
+        dropout=0.1
+    )
+    
+    # Process embeddings through encoder
+    encoded_output = encoder(embeddings)
+    
+    # Verify output dimensions
+    print("\nEncoder output shape (should match input):", encoded_output.shape)
+    
+    # Check value ranges
+    print("\nEncoder output analysis:")
+    print(f"Min: {encoded_output.min().item():.4f}  Max: {encoded_output.max().item():.4f}")
+    print(f"Mean: {encoded_output.mean().item():.4f}  Std: {encoded_output.std().item():.4f}")
+    
+    # Check residual connections
+    diff = (embeddings - encoded_output).abs().mean()
+    print(f"\nAbsolute difference between input and output: {diff.item():.4f} (should be >0 but not too large)")
+    
+    # Check attention mechanism
+    print("\nAttention mechanism verification:")
+    attn_output, attn_weights = encoder.attention(encoder.norm1(embeddings), None
+    print("Attention output shape:", attn_output[0].shape if isinstance(attn_output, tuple) else attn_output.shape)
+    
+    # Verify MLP operations
+    mlp_output = encoder.mlp(encoder.norm2(embeddings))
+    print("MLP output shape:", mlp_output.shape)
+    
+    # Final sanity checks
+    assert not torch.isnan(encoded_output).any(), "Encoder output contains NaN!"
+    assert not torch.isinf(encoded_output).any(), "Encoder output contains inf!"
+    print("\nAll encoder checks passed!")
+
+    # Optional: Test gradient flow
+    dummy_loss = encoded_output.mean()
+    dummy_loss.backward()
+    print("\nGradient flow test completed without errors")
+
 if __name__ == "__main__":
     main()
