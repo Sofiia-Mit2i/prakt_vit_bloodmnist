@@ -17,9 +17,7 @@ class InputEmbedding(nn.Module):
         #    "Image dimensions must be divisible by patch size"
 
         # Calculate number of patches
-        self.num_patches = (image_size[0] // patch_size[0]) * \
-                           (image_size[1] // patch_size[1]) * \
-                           (image_size[2] // patch_size[2])
+        self.num_patches = (image_size[0] // patch_size[0])
         print(self.num_patches)
         self.patch_size = patch_size
         print(self.patch_size)
