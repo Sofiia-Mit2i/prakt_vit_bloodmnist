@@ -8,8 +8,8 @@ class VisionTransformer(nn.Module):
     def __init__(self,
                  image_size=28,           # Input image size (height/width)
                  patch_size=7,            # Size of image patches
-                 n_channels=3,            # Input color channels
-                 num_classes=8,           # BloodMNIST has 8 classes
+                 n_channels=1,            # Input color channels
+                 num_classes=8,           # FractureMNIST3D has 3 classes
                  latent_size=256,         # Embedding dimension
                  num_encoders=6,          # Number of transformer blocks
                  num_heads=8,             # Attention heads per encoder
