@@ -2,7 +2,7 @@ import torch
 import nibabel as nib
 from torch.utils.data import DataLoader
 from torchvision import transforms
-from medmnist import OrganMNIST3D
+from medmnist import FractureMNIST3D
 
 class ToTensor4D:
     def __call__(self, pic):
@@ -37,7 +37,7 @@ def get_dataloaders(batch_size=16, num_workers=4, prefetch_factor=2, pin_memory=
     """Loads the FractureMNIST3D dataset and applies computed normalization."""
     
     # --- Load datasets first (without transform) to compute mean & std ---
-    train_dataset_raw = OrganMNIST3D(split='train', download=True)
+    train_dataset_raw = FractureMNIST3D(split='train', download=True)
     
     # Compute normalization stats
     mean_val, std_val = compute_normalization(train_dataset_raw)
@@ -50,9 +50,9 @@ def get_dataloaders(batch_size=16, num_workers=4, prefetch_factor=2, pin_memory=
     ])
 
     # --- Load datasets again with transforms ---
-    train_dataset = OrganMNIST3D(split='train', download=True, transform=transform)
-    val_dataset = OrganMNIST3D(split='val', download=True,  transform=transform)
-    test_dataset = OrganMNIST3D(split='test', download=True, transform=transform)
+    train_dataset = FractureMNIST3D(split='train', download=True, transform=transform)
+    val_dataset = FractureMNIST3D(split='val', download=True,  transform=transform)
+    test_dataset = FractureMNIST3D(split='test', download=True, transform=transform)
 
     # --- Create DataLoaders ---
     train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=num_workers, pin_memory=pin_memory, prefetch_factor=prefetch_factor)
