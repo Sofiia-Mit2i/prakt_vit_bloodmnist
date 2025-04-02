@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 
 class ViTTrainer:
     def __init__(self, model, train_loader, test_loader, train_loader_at_eval,
-                 device, hyperparams, task='multi-class', data_flag='bloodmnist'):
+                 device, hyperparams, task='multi-class', data_flag='fracturemnist3d'):
         self.model = model.to(device)
         self.device = device
         self.hyperparams = hyperparams
