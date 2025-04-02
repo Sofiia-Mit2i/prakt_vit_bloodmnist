@@ -35,8 +35,8 @@ def main():
             'num_encoders': 6,
             'num_heads': 8,
             'dropout': 0.1,
-            'image_size': 28,     
-            'patch_size': 7,
+            'image_size':(28, 28, 28),         # (Depth, Height, Width)
+            'patch_size':(7, 7, 7), 
         }
 
         # Get data loaders
@@ -67,8 +67,8 @@ def main():
     
         print("\n=== Testing Input Embedding ===")
         embedder = InputEmbedding(
-            image_size=28,  # FractureMNIST3D dimensions
-            patch_size=7,
+            image_size=(28, 28, 28),         # (Depth, Height, Width)
+            patch_size=(7, 7, 7), 
             n_channels=1,
             latent_size=256
         )
@@ -141,8 +141,8 @@ def main():
     
         logging.info("Building Vision Transformer...")
         model = VisionTransformer(
-                image_size=28,
-                patch_size=7,
+                image_size=(28, 28, 28),         # (Depth, Height, Width)
+                patch_size=(7, 7, 7),
                 n_channels=1,  # FractureMNIST3D is grayscale
                 num_classes=hyperparams['num_classes'],
                 latent_size=hyperparams['latent_size'],
