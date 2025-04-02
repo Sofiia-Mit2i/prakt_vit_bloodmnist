@@ -54,9 +54,16 @@ class InputEmbedding(nn.Module):
         
         # 1. Apply 3D Conv to get patch embeddings
         patches = self.patch_embedding(x)  # Shape: (batch_size, latent_size, d', h', w')
-        
+        # Flatten spatial dimensions
+        #patches = patches.flatten(2).transpose(1, 2)  # (B, num_patches, latent_size)
+        #Each patch is treated like a small chunk of the 3D image (like a small cube of the CT scan).
+        #Best when treating patches as small units that hold spatial information (good for medical images).
         # 2. Flatten patches into sequence
+        
         patches = einops.rearrange(patches, "b c d h w -> b (d h w) c")
+        
+        #Instead of thinking in patches, the model learns from each small voxel separately.
+        #Good when ViT needs to process every voxel independently, without considering local patch structure
         
         # 3. Add class token
         class_tokens = self.class_token.expand(batch_size, -1, -1)
