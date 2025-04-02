@@ -22,7 +22,7 @@ def main():
     # Configuration
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     logging.info(f"Initializing training on device: {device}")
-     try:
+    try:
         # Hyperparameters
         hyperparams = {
             'batch_size': 16,
