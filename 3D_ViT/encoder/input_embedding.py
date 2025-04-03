@@ -64,7 +64,7 @@ class InputEmbedding(nn.Module):
         #Good when ViT needs to process every voxel independently, without considering local patch structure
         
         # 3. Add positional embeddings
-        embeddings += self.pos_embedding
+        patches += self.pos_embedding
 
         # 4. Add class token
         class_tokens = self.class_token.expand(batch_size, -1, -1)
