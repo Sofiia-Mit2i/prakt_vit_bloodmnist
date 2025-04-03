@@ -102,7 +102,7 @@ def get_dataloaders(batch_size=16, num_workers=4, prefetch_factor=2, pin_memory=
         base_transform,
         transforms.RandomApply([
             transforms.RandomRotation(15),
-            transforms.RandomAffine(translate=(0.1, 0.1)),
+            transforms.RandomAffine(degrees=15, translate=(0.1, 0.1)),
             transforms.RandomHorizontalFlip(p=0.5),
             transforms.RandomVerticalFlip(p=0.5)
         ], p=0.7),
