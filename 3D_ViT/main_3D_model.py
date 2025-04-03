@@ -53,7 +53,7 @@ def main():
             num_classes=hyperparams['num_classes'],
             latent_size=256,
             num_encoders=6,
-            num_heads=12,
+            num_heads=16,
             dropout=0.1
         )
         
