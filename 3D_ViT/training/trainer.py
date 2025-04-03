@@ -81,7 +81,7 @@ class ViTTrainer:
             
             progress_bar.set_postfix({'loss': f"{loss.item():.4f}"})
         
-        train_acc = 100. * correct / total
+        train_acc = correct / total
         return total_loss / len(self.train_loader), train_acc
 
     def validate(self):
