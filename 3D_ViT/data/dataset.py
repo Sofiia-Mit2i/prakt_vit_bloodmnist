@@ -84,15 +84,21 @@ def get_dataloaders(batch_size=16, num_workers=4, prefetch_factor=2, pin_memory=
     #   transforms.Normalize(mean=[mean_val], std=[std_val])  # Normalize using computed values
     #])
 
-    train_transform = transforms.Compose([
+    # Define transforms
+    base_transform = transforms.Compose([
         ToTensor4D(),
-        MedicalNormalize(mean=stats['mean'], std=stats['std']),
+        MedicalNormalize(mean=stats['mean'], std=stats['std'])
+    ])
+
+    train_transform = transforms.Compose([
+        base_transform,
         transforms.RandomApply([
-            transforms.RandomAffine(degrees=15, translate=(0.1, 0.1)),
+            transforms.RandomRotation(15),
+            transforms.RandomAffine(translate=(0.1, 0.1)),
             transforms.RandomHorizontalFlip(p=0.5),
             transforms.RandomVerticalFlip(p=0.5)
-        ], p=0.8),
-        transforms.RandomErasing(p=0.1, scale=(0.02, 0.1))
+        ], p=0.7),
+        transforms.RandomErasing(p=0.1)
     ])
     # --- Load datasets again with transforms ---
     train_dataset = FractureMNIST3D(split='train', download=True, transform=train_transform)
