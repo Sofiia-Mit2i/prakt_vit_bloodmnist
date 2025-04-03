@@ -32,7 +32,7 @@ def main():
         'num_workers': 4,
         'lr': 3e-4,
         'weight_decay': 0.01,
-        'num_epochs': 50,
+        'num_epochs': 10,
         'num_classes': 3  # FractureMNIST3D has 3 classes
     }
     
@@ -53,7 +53,7 @@ def main():
             num_classes=hyperparams['num_classes'],
             latent_size=256,
             num_encoders=6,
-            num_heads=8,
+            num_heads=16,
             dropout=0.1
         )
         
