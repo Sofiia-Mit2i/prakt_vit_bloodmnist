@@ -215,3 +215,54 @@
 2025-04-03 11:17:34,824 - INFO - TEST  AUC: 0.650  ACC: 0.479
 2025-04-03 11:17:34,824 - INFO - Training complete. Best model: AUC 0.669, ACC 0.475
 2025-04-03 11:17:34,826 - INFO - Training process completed successfully
+2025-04-03 11:30:40,457 - INFO - Starting BloodMNIST ViT Training Pipeline
+2025-04-03 11:30:40,458 - INFO - Using device: cpu
+2025-04-03 11:30:40,458 - INFO - Initializing data pipelines...
+2025-04-03 11:30:41,808 - INFO - Building Vision Transformer...
+2025-04-03 11:30:41,835 - INFO - Beginning training process...
+2025-04-03 11:30:41,835 - INFO - Starting training...
+2025-04-03 11:30:41,908 - ERROR - Training failed: cannot access local variable 'embeddings' where it is not associated with a value
+2025-04-03 11:30:41,908 - ERROR - Main execution failed: cannot access local variable 'embeddings' where it is not associated with a value
+2025-04-03 11:31:59,173 - INFO - Starting BloodMNIST ViT Training Pipeline
+2025-04-03 11:31:59,174 - INFO - Using device: cpu
+2025-04-03 11:31:59,174 - INFO - Initializing data pipelines...
+2025-04-03 11:32:00,591 - INFO - Building Vision Transformer...
+2025-04-03 11:32:00,618 - INFO - Beginning training process...
+2025-04-03 11:32:00,619 - INFO - Starting training...
+2025-04-03 11:32:08,713 - WARNING - Training interrupted by user
+2025-04-03 11:32:08,744 - INFO - Training process completed successfully
+2025-04-03 11:32:15,894 - INFO - Starting BloodMNIST ViT Training Pipeline
+2025-04-03 11:32:15,895 - INFO - Using device: cpu
+2025-04-03 11:32:15,895 - INFO - Initializing data pipelines...
+2025-04-03 11:32:17,231 - INFO - Building Vision Transformer...
+2025-04-03 11:32:17,258 - INFO - Beginning training process...
+2025-04-03 11:32:17,258 - INFO - Starting training...
+2025-04-03 11:34:49,377 - INFO - Epoch 1 - Train Loss: 1.0164
+2025-04-03 11:34:58,346 - INFO - TEST  AUC: 0.653  ACC: 0.467
+2025-04-03 11:34:58,375 - INFO - New best model saved with AUC: 0.653, ACC: 0.467
+2025-04-03 11:37:38,580 - INFO - Epoch 2 - Train Loss: 0.9916
+2025-04-03 11:37:47,362 - INFO - TEST  AUC: 0.652  ACC: 0.500
+2025-04-03 11:40:21,195 - INFO - Epoch 3 - Train Loss: 0.9651
+2025-04-03 11:40:30,108 - INFO - TEST  AUC: 0.668  ACC: 0.508
+2025-04-03 11:40:30,130 - INFO - New best model saved with AUC: 0.668, ACC: 0.508
+2025-04-03 11:43:04,803 - INFO - Epoch 4 - Train Loss: 0.9471
+2025-04-03 11:43:13,504 - INFO - TEST  AUC: 0.658  ACC: 0.467
+2025-04-03 11:45:47,865 - INFO - Epoch 5 - Train Loss: 0.9019
+2025-04-03 11:45:56,608 - INFO - TEST  AUC: 0.652  ACC: 0.438
+2025-04-03 11:48:40,367 - INFO - Epoch 6 - Train Loss: 0.8807
+2025-04-03 11:48:49,273 - INFO - TEST  AUC: 0.678  ACC: 0.454
+2025-04-03 11:48:49,295 - INFO - New best model saved with AUC: 0.678, ACC: 0.454
+2025-04-03 11:51:31,103 - INFO - Epoch 7 - Train Loss: 0.7942
+2025-04-03 11:51:40,013 - INFO - TEST  AUC: 0.697  ACC: 0.529
+2025-04-03 11:51:40,043 - INFO - New best model saved with AUC: 0.697, ACC: 0.529
+2025-04-03 11:54:14,494 - INFO - Epoch 8 - Train Loss: 0.7529
+2025-04-03 11:54:23,326 - INFO - TEST  AUC: 0.695  ACC: 0.525
+2025-04-03 11:56:58,509 - INFO - Epoch 9 - Train Loss: 0.6985
+2025-04-03 11:57:07,358 - INFO - TEST  AUC: 0.656  ACC: 0.483
+2025-04-03 11:59:50,342 - INFO - Epoch 10 - Train Loss: 0.6446
+2025-04-03 11:59:59,817 - INFO - TEST  AUC: 0.682  ACC: 0.483
+2025-04-03 11:59:59,818 - INFO - ==> Final Evaluation <==
+2025-04-03 12:00:38,591 - INFO - TRAIN  AUC: 0.936  ACC: 0.820
+2025-04-03 12:00:47,840 - INFO - TEST  AUC: 0.682  ACC: 0.483
+2025-04-03 12:00:47,841 - INFO - Training complete. Best model: AUC 0.697, ACC 0.529
+2025-04-03 12:00:47,842 - INFO - Training process completed successfully
