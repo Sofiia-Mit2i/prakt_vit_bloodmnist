@@ -4,7 +4,7 @@ import logging
 from torch import nn, optim
 from torch.utils.data import DataLoader
 import torchvision.transforms as transforms
-from medmnist import BloodMNIST
+from medmnist import Fracture3DMNIST
 from encoder.input_embedding import InputEmbedding
 from encoder.encoder_block import EncoderBlock
 from models.vit import VisionTransformer
@@ -82,6 +82,6 @@ def main():
         raise
 
 if __name__ == "__main__":
-    logging.info("Starting BloodMNIST ViT Training Pipeline")
+    logging.info("Starting Fracture3DMNIST ViT Training Pipeline")
     main()
     logging.info("Training process completed successfully")
