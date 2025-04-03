@@ -11,6 +11,7 @@ from models.vit import VisionTransformer
 from data.dataset import get_dataloaders
 from training.trainer import ViTTrainer
 from tqdm import tqdm
+from sklearn.metrics import roc_auc_score
 
 # Configure logging
 logging.basicConfig(
@@ -32,7 +33,7 @@ def main():
         'num_workers': 4,
         'lr': 3e-4,
         'weight_decay': 0.01,
-        'num_epochs': 50,
+        'num_epochs': 5,
         'num_classes': 3  # FractureMNIST3D has 3 classes
     }
     
@@ -48,12 +49,12 @@ def main():
         logging.info("Building Vision Transformer...")
         model = VisionTransformer(
             image_size=28,
-            patch_size=7,
+            patch_size=4,
             n_channels=1,
             num_classes=hyperparams['num_classes'],
             latent_size=256,
             num_encoders=6,
-            num_heads=8,
+            num_heads=16,
             dropout=0.1
         )
         
@@ -62,6 +63,7 @@ def main():
             model=model,
             train_loader=train_loader,
             test_loader=test_loader,
+            val_loader=val_loader,
             train_loader_at_eval=train_loader_at_eval,
             device=device,
             hyperparams=hyperparams,
