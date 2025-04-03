@@ -84,7 +84,7 @@ class ViTTrainer:
         train_acc = correct / total
         return total_loss / len(self.train_loader), train_acc
 
-    def validate(self):
+    def validate(self, loader):
         """Validate the model on the validation set"""
         self.model.eval()
         total_loss = 0.0
