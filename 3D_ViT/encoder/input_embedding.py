@@ -36,7 +36,7 @@ class InputEmbedding(nn.Module):
         self.class_token = nn.Parameter(torch.randn(1, 1, latent_size))
                    
         # 3. Positional Embedding for 3D patches
-        self.pos_embedding = nn.Parameter(torch.randn(1, self.num_patches + 1, latent_size))
+        self.pos_embedding = nn.Parameter(torch.randn(1, self.num_patches, latent_size))
         
         # 4. Dropout
         self.dropout = nn.Dropout(dropout)
@@ -63,12 +63,12 @@ class InputEmbedding(nn.Module):
         #Instead of thinking in patches, the model learns from each small voxel separately.
         #Good when ViT needs to process every voxel independently, without considering local patch structure
         
-        # 3. Add class token
+        # 3. Add positional embeddings
+        embeddings += self.pos_embedding
+
+        # 4. Add class token
         class_tokens = self.class_token.expand(batch_size, -1, -1)
         embeddings = torch.cat([class_tokens, patches], dim=1)
-        
-        # 4. Add positional embeddings
-        embeddings += self.pos_embedding
         
         # 5. Apply dropout
         return self.dropout(embeddings)
