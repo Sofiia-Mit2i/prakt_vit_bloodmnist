@@ -11,6 +11,7 @@ from models.vit import VisionTransformer
 from data.dataset import get_dataloaders
 from training.trainer import ViTTrainer
 from tqdm import tqdm
+from sklearn.metrics import roc_auc_score
 
 # Configure logging
 logging.basicConfig(
@@ -62,6 +63,7 @@ def main():
             model=model,
             train_loader=train_loader,
             test_loader=test_loader,
+            val_loader=val_loader,
             train_loader_at_eval=train_loader_at_eval,
             device=device,
             hyperparams=hyperparams,
