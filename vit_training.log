@@ -266,3 +266,35 @@
 2025-04-03 12:00:47,840 - INFO - TEST  AUC: 0.682  ACC: 0.483
 2025-04-03 12:00:47,841 - INFO - Training complete. Best model: AUC 0.697, ACC 0.529
 2025-04-03 12:00:47,842 - INFO - Training process completed successfully
+2025-04-03 14:04:20,235 - INFO - Starting BloodMNIST ViT Training Pipeline
+2025-04-03 14:04:20,236 - INFO - Using device: cpu
+2025-04-03 14:04:20,236 - INFO - Initializing data pipelines...
+2025-04-03 14:04:21,535 - INFO - Building Vision Transformer...
+2025-04-03 14:04:21,560 - INFO - Beginning training process...
+2025-04-03 14:04:21,561 - INFO - Starting training...
+2025-04-03 14:04:32,924 - WARNING - Training interrupted by user
+2025-04-03 14:04:32,939 - INFO - Training process completed successfully
+2025-04-03 14:05:40,720 - INFO - Starting FractureMNIST3D ViT Training Pipeline
+2025-04-03 14:05:40,721 - INFO - Using device: cpu
+2025-04-03 14:05:40,721 - INFO - Initializing data pipelines...
+2025-04-03 14:05:42,010 - INFO - Building Vision Transformer...
+2025-04-03 14:05:42,035 - INFO - Beginning training process...
+2025-04-03 14:05:42,036 - INFO - Starting training...
+2025-04-03 14:05:57,399 - INFO - Epoch 1 - Train Loss: 1.0308
+2025-04-03 14:05:58,346 - INFO - TEST  AUC: 0.660  ACC: 0.546
+2025-04-03 14:05:58,368 - INFO - New best model saved with AUC: 0.660, ACC: 0.546
+2025-04-03 14:06:13,843 - INFO - Epoch 2 - Train Loss: 0.9838
+2025-04-03 14:06:14,832 - INFO - TEST  AUC: 0.664  ACC: 0.454
+2025-04-03 14:06:14,856 - INFO - New best model saved with AUC: 0.664, ACC: 0.454
+2025-04-03 14:06:31,881 - INFO - Epoch 3 - Train Loss: 0.9625
+2025-04-03 14:06:32,974 - INFO - TEST  AUC: 0.654  ACC: 0.417
+2025-04-03 14:06:49,860 - INFO - Epoch 4 - Train Loss: 0.9477
+2025-04-03 14:06:50,949 - INFO - TEST  AUC: 0.678  ACC: 0.479
+2025-04-03 14:06:50,974 - INFO - New best model saved with AUC: 0.678, ACC: 0.479
+2025-04-03 14:07:08,038 - INFO - Epoch 5 - Train Loss: 0.8959
+2025-04-03 14:07:09,107 - INFO - TEST  AUC: 0.641  ACC: 0.471
+2025-04-03 14:07:09,108 - INFO - ==> Final Evaluation <==
+2025-04-03 14:07:13,500 - INFO - TRAIN  AUC: 0.806  ACC: 0.561
+2025-04-03 14:07:14,594 - INFO - TEST  AUC: 0.641  ACC: 0.471
+2025-04-03 14:07:14,594 - INFO - Training complete. Best model: AUC 0.678, ACC 0.479
+2025-04-03 14:07:14,595 - INFO - Training process completed successfully

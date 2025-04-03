@@ -4,7 +4,7 @@ import logging
 from torch import nn, optim
 from torch.utils.data import DataLoader
 import torchvision.transforms as transforms
-from medmnist import BloodMNIST
+from medmnist import FractureMNIST3D
 from encoder.input_embedding import InputEmbedding
 from encoder.encoder_block import EncoderBlock
 from models.vit import VisionTransformer
@@ -32,7 +32,7 @@ def main():
         'num_workers': 4,
         'lr': 3e-4,
         'weight_decay': 0.01,
-        'num_epochs': 10,
+        'num_epochs': 5,
         'num_classes': 3  # FractureMNIST3D has 3 classes
     }
     
@@ -48,7 +48,7 @@ def main():
         logging.info("Building Vision Transformer...")
         model = VisionTransformer(
             image_size=28,
-            patch_size=4,
+            patch_size=7,
             n_channels=1,
             num_classes=hyperparams['num_classes'],
             latent_size=256,
@@ -80,6 +80,6 @@ def main():
         raise
 
 if __name__ == "__main__":
-    logging.info("Starting BloodMNIST ViT Training Pipeline")
+    logging.info("Starting FractureMNIST3D ViT Training Pipeline")
     main()
     logging.info("Training process completed successfully")
