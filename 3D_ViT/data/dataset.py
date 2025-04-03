@@ -57,14 +57,22 @@ class MedicalNormalize:
 def compute_robust_stats(dataset, num_samples=500):
     """Compute robust statistics using random samples"""
     indices = np.random.choice(len(dataset), num_samples, replace=False)
-    samples = torch.stack([dataset[i][0] for i in indices])
+    samples = []    
+
+    for i in indices:
+        img, _ = dataset[i]
+        # Convert numpy array to tensor and permute dimensions
+        tensor_img = torch.tensor(img, dtype=torch.float32).permute(3, 0, 1, 2)
+        samples.append(tensor_img)
     
+    samples = torch.stack(samples)
+
     return {
         'mean': samples.mean().item(),
         'std': samples.std().item(),
         'median': samples.median().item(),
-        'pct_05': np.percentile(samples.numpy(), 0.5),
-        'pct_995': np.percentile(samples.numpy(), 99.5)
+        'min': samples.min().item(),
+        'max': samples.max().item()
     }
 
 def get_dataloaders(batch_size=16, num_workers=4, prefetch_factor=2, pin_memory=True):
