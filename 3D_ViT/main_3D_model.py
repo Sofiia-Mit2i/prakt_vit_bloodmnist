@@ -48,12 +48,12 @@ def main():
         logging.info("Building Vision Transformer...")
         model = VisionTransformer(
             image_size=28,
-            patch_size=7,
+            patch_size=4,
             n_channels=1,
             num_classes=hyperparams['num_classes'],
             latent_size=256,
             num_encoders=6,
-            num_heads=16,
+            num_heads=8,
             dropout=0.1
         )
         
