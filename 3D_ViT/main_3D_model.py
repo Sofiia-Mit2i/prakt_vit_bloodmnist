@@ -40,7 +40,7 @@ def main():
     try:
         # Data loading
         logging.info("Initializing data pipelines...")
-        train_loader, train_loader_at_eval, val_loader, test_loader = get_dataloaders(
+        train_loader, val_loader, test_loader = get_dataloaders(
             batch_size=hyperparams['batch_size'],
             num_workers=hyperparams['num_workers']
         )
