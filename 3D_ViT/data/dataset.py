@@ -1,9 +1,11 @@
 
 import torch
 import nibabel as nib
+import numpy as np
 from torch.utils.data import DataLoader
 from torchvision import transforms
 from medmnist import FractureMNIST3D
+
 
 class ToTensor4D:
     def __call__(self, pic):
