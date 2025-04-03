@@ -3,6 +3,7 @@ import torch
 import numpy as np
 from tqdm import tqdm
 from torch import nn, optim
+from sklearn.metrics import roc_auc_score
 
 import medmnist
 from medmnist import INFO, Evaluator
