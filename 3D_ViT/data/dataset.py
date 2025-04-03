@@ -8,8 +8,6 @@ class ToTensor4D:
     def __call__(self, pic):
         if pic.ndim == 4:
             return torch.tensor(pic, dtype=torch.float32)
-        elif pic.ndim == 4:
-            return torch.tensor(pic, dtype=torch.float32)
         else:
             raise ValueError(f"pic should be 4 dimensional. Got {pic.ndim} dimensions.")
             
