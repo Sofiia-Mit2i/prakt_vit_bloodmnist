@@ -140,8 +140,8 @@ class ViTTrainer:
             
             # Final evaluation
             logger.info("==> Final Evaluation <==")
-            self.evaluate('train')
-            self.evaluate('test')
+            self.validate('train')
+            self.validate('test')
             
             logger.info(f"Training complete. Best model - AUC: {self.best_metrics['auc']:.4f}, ACC: {self.best_metrics['acc']:.4f}")
         
