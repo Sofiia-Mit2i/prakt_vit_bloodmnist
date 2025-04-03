@@ -69,7 +69,7 @@ def get_dataloaders(batch_size=16, num_workers=4, prefetch_factor=2, pin_memory=
     """Loads the FractureMNIST3D dataset and applies computed normalization."""
      # --- Load datasets first (without transform) to compute mean & std ---
     train_dataset_raw = FractureMNIST3D(split='train', download=True)
-    stats = compute_robust_stats(train_raw)
+    stats = compute_robust_stats(train_dataset_raw)
 
 
     # Compute normalization stats
