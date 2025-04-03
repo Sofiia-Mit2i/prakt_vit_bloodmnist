@@ -28,7 +28,7 @@ def main():
     
     # Configuration
     hyperparams = {
-        'batch_size': ,
+        'batch_size': 12,
         'num_workers': 4,
         'lr': 3e-4,
         'weight_decay': 0.01,
