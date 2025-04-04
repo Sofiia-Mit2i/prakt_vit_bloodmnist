@@ -29,10 +29,10 @@ def main():
     # Configuration
     hyperparams = {
         'batch_size': 12,
-        'num_workers': 4,
+        'num_workers': 8,
         'lr': 3e-4,
         'weight_decay': 0.01,
-        'num_epochs': 5,
+        'num_epochs': 15,
         'num_classes': 3  # FractureMNIST3D has 3 classes
     }
     
@@ -48,12 +48,12 @@ def main():
         logging.info("Building Vision Transformer...")
         model = VisionTransformer(
             image_size=28,
-            patch_size=7,
+            patch_size=4,
             n_channels=1,
             num_classes=hyperparams['num_classes'],
             latent_size=256,
             num_encoders=6,
-            num_heads=8,
+            num_heads=16,
             dropout=0.1
         )
         
