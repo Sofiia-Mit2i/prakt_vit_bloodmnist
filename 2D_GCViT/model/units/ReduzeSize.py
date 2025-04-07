@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
-from SE import SE
-from permutation import _to_channel_first,_to_channel_last
+from .SE import SE
+from .permutation import _to_channel_first,_to_channel_last
 
 class ReduceSize(nn.Module):
     """
