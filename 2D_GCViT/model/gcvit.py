@@ -13,7 +13,7 @@ class GCViT(nn.Module):
                  num_heads,
                  window_size=(24, 24, 24, 24),
                  window_size_pre=(7, 7, 14, 7),
-                 resolution=224,
+                 resolution=28,
                  drop_path_rate=0.2,
                  in_chans=3,
                  qkv_bias=True,
