@@ -7,8 +7,8 @@ from .layer import GCViTLayer
 
 class GCViT(nn.Module):
     def __init__(self,
-                 dim,
-                 depths,
+                 dim, #embedding dimension
+                 depths, #tuple of ints, number of transformer blocks at each level
                  mlp_ratio,
                  num_heads,
                  window_size=(24, 24, 24, 24),
