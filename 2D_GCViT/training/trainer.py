@@ -55,6 +55,11 @@ class GCViTTrainer:
             # Forward pass
             self.optimizer.zero_grad()
             outputs = self.model(inputs)
+            #print(outputs)
+            #print(outputs[-1])
+            #print(type(outputs))
+            #print(type(outputs[-1]))
+            #outputs = outputs[-1]
             loss = self.criterion(outputs, targets)
             
             # Backward pass
