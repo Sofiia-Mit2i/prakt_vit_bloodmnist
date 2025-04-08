@@ -6,3 +6,31 @@
 2025-04-03 13:19:43,803 - INFO - Starting training...
 2025-04-03 13:27:07,474 - INFO - Epoch 1 - Train Loss: 1.0294, Train Acc: 0.48%
 2025-04-03 13:27:18,458 - INFO - Validation - Loss: 1.0332, Accuracy: 45.63%, AUC: 0.6441
+2025-04-03 13:31:11,864 - INFO - Starting BloodMNIST ViT Training Pipeline
+2025-04-03 13:31:12,190 - INFO - Using device: cpu
+2025-04-03 13:31:12,190 - INFO - Initializing data pipelines...
+2025-04-03 13:31:12,363 - ERROR - Main execution failed: name 'train_raw' is not defined
+2025-04-03 13:35:15,590 - INFO - Starting BloodMNIST ViT Training Pipeline
+2025-04-03 13:35:15,726 - INFO - Using device: cpu
+2025-04-03 13:35:15,726 - INFO - Initializing data pipelines...
+2025-04-03 13:35:15,848 - ERROR - Main execution failed: name 'train_raw' is not defined
+2025-04-03 13:36:44,084 - INFO - Starting BloodMNIST ViT Training Pipeline
+2025-04-03 13:36:44,221 - INFO - Using device: cpu
+2025-04-03 13:36:44,222 - INFO - Initializing data pipelines...
+2025-04-03 13:36:44,343 - ERROR - Main execution failed: name 'np' is not defined
+2025-04-03 13:38:14,355 - INFO - Starting BloodMNIST ViT Training Pipeline
+2025-04-03 13:38:14,544 - INFO - Using device: cpu
+2025-04-03 13:38:14,544 - INFO - Initializing data pipelines...
+2025-04-03 13:38:14,920 - ERROR - Main execution failed: expected Tensor as element 0 in argument 0, but got numpy.ndarray
+2025-04-03 13:40:42,079 - INFO - Starting BloodMNIST ViT Training Pipeline
+2025-04-03 13:40:42,273 - INFO - Using device: cpu
+2025-04-03 13:40:42,273 - INFO - Initializing data pipelines...
+2025-04-03 13:40:42,518 - ERROR - Main execution failed: expected Tensor as element 0 in argument 0, but got numpy.ndarray
+2025-04-03 13:42:24,537 - INFO - Starting BloodMNIST ViT Training Pipeline
+2025-04-03 13:42:24,666 - INFO - Using device: cpu
+2025-04-03 13:42:24,667 - INFO - Initializing data pipelines...
+2025-04-03 13:42:25,220 - ERROR - Main execution failed: RandomAffine.__init__() missing 1 required positional argument: 'degrees'
+2025-04-03 13:43:43,476 - INFO - Starting BloodMNIST ViT Training Pipeline
+2025-04-03 13:43:43,636 - INFO - Using device: cpu
+2025-04-03 13:43:43,636 - INFO - Initializing data pipelines...
+2025-04-03 13:43:44,167 - ERROR - Main execution failed: name 'eval_transform' is not defined
