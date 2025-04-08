@@ -4,7 +4,11 @@ import logging
 from torch import nn, optim
 from torch.utils.data import DataLoader
 import torchvision.transforms as transforms
+<<<<<<< HEAD
 from medmnist import Fracture3DMNIST
+=======
+from medmnist import FractureMNIST3D
+>>>>>>> 16ed084873d61d210826188e3820ba450ee604dd
 from encoder.input_embedding import InputEmbedding
 from encoder.encoder_block import EncoderBlock
 from models.vit import VisionTransformer
@@ -31,10 +35,14 @@ def main():
     # Configuration
     hyperparams = {
         'batch_size': 12,
-        'num_workers': 4,
+        'num_workers': 8,
         'lr': 3e-4,
         'weight_decay': 0.01,
+<<<<<<< HEAD
         'num_epochs': 1,
+=======
+        'num_epochs': 15,
+>>>>>>> 16ed084873d61d210826188e3820ba450ee604dd
         'num_classes': 3  # FractureMNIST3D has 3 classes
     }
     
@@ -83,6 +91,10 @@ def main():
         raise
 
 if __name__ == "__main__":
+<<<<<<< HEAD
     logging.info("Starting Fracture3DMNIST ViT Training Pipeline")
+=======
+    logging.info("Starting FractureMNIST3D ViT Training Pipeline")
+>>>>>>> 16ed084873d61d210826188e3820ba450ee604dd
     main()
     logging.info("Training process completed successfully")

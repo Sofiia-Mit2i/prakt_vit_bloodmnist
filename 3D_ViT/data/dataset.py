@@ -10,9 +10,13 @@ from medmnist import FractureMNIST3D
 class ToTensor4D:
     def __call__(self, pic):
         if pic.ndim == 4:
+<<<<<<< HEAD
             tensor = torch.tensor(pic, dtype=torch.float32)
             # Reorder to PyTorch format [C, D, H, W]
             return tensor.permute(3, 0, 1, 2)
+=======
+            return torch.tensor(pic, dtype=torch.float32)
+>>>>>>> 16ed084873d61d210826188e3820ba450ee604dd
         else:
             raise ValueError(f"pic should be 4 dimensional. Got {pic.ndim} dimensions.")
             

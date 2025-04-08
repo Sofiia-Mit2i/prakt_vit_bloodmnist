@@ -127,3 +127,274 @@
 2025-04-03 10:35:14,904 - INFO - New best model saved with AUC: 0.663, ACC: 0.529
 2025-04-03 10:35:21,101 - WARNING - Training interrupted by user
 2025-04-03 10:35:21,102 - INFO - Training process completed successfully
+2025-04-03 10:40:15,820 - INFO - Starting BloodMNIST ViT Training Pipeline
+2025-04-03 10:40:15,820 - INFO - Using device: cpu
+2025-04-03 10:40:15,820 - INFO - Initializing data pipelines...
+2025-04-03 10:40:17,117 - INFO - Building Vision Transformer...
+2025-04-03 10:40:17,143 - INFO - Beginning training process...
+2025-04-03 10:40:17,143 - INFO - Starting training...
+2025-04-03 10:40:18,651 - WARNING - Training interrupted by user
+2025-04-03 10:40:18,652 - INFO - Training process completed successfully
+2025-04-03 10:41:30,133 - INFO - Starting BloodMNIST ViT Training Pipeline
+2025-04-03 10:41:30,133 - INFO - Using device: cpu
+2025-04-03 10:41:30,133 - INFO - Initializing data pipelines...
+2025-04-03 10:41:31,548 - INFO - Building Vision Transformer...
+2025-04-03 10:41:31,548 - ERROR - Main execution failed: Latent size must be divisible by num_heads
+2025-04-03 10:42:23,769 - INFO - Starting BloodMNIST ViT Training Pipeline
+2025-04-03 10:42:23,770 - INFO - Using device: cpu
+2025-04-03 10:42:23,770 - INFO - Initializing data pipelines...
+2025-04-03 10:42:25,106 - INFO - Building Vision Transformer...
+2025-04-03 10:42:25,132 - INFO - Beginning training process...
+2025-04-03 10:42:25,132 - INFO - Starting training...
+2025-04-03 10:42:42,261 - INFO - Epoch 1 - Train Loss: 1.0231
+2025-04-03 10:42:43,276 - INFO - TEST  AUC: 0.660  ACC: 0.412
+2025-04-03 10:42:43,296 - INFO - New best model saved with AUC: 0.660, ACC: 0.412
+2025-04-03 10:43:00,561 - INFO - Epoch 2 - Train Loss: 1.0080
+2025-04-03 10:43:01,559 - INFO - TEST  AUC: 0.661  ACC: 0.492
+2025-04-03 10:43:01,578 - INFO - New best model saved with AUC: 0.661, ACC: 0.492
+2025-04-03 10:43:20,512 - INFO - Epoch 3 - Train Loss: 0.9676
+2025-04-03 10:43:21,644 - INFO - TEST  AUC: 0.662  ACC: 0.521
+2025-04-03 10:43:21,668 - INFO - New best model saved with AUC: 0.662, ACC: 0.521
+2025-04-03 10:43:41,625 - INFO - Epoch 4 - Train Loss: 0.9487
+2025-04-03 10:43:42,765 - INFO - TEST  AUC: 0.645  ACC: 0.483
+2025-04-03 10:44:01,419 - INFO - Epoch 5 - Train Loss: 0.8982
+2025-04-03 10:44:02,531 - INFO - TEST  AUC: 0.625  ACC: 0.479
+2025-04-03 10:44:21,136 - INFO - Epoch 6 - Train Loss: 0.8145
+2025-04-03 10:44:22,241 - INFO - TEST  AUC: 0.619  ACC: 0.487
+2025-04-03 10:44:40,710 - INFO - Epoch 7 - Train Loss: 0.7646
+2025-04-03 10:44:41,832 - INFO - TEST  AUC: 0.625  ACC: 0.450
+2025-04-03 10:45:00,353 - INFO - Epoch 8 - Train Loss: 0.7385
+2025-04-03 10:45:01,477 - INFO - TEST  AUC: 0.635  ACC: 0.479
+2025-04-03 10:45:20,210 - INFO - Epoch 9 - Train Loss: 0.5908
+2025-04-03 10:45:21,337 - INFO - TEST  AUC: 0.608  ACC: 0.517
+2025-04-03 10:45:39,870 - INFO - Epoch 10 - Train Loss: 0.5369
+2025-04-03 10:45:41,010 - INFO - TEST  AUC: 0.588  ACC: 0.429
+2025-04-03 10:45:41,010 - INFO - ==> Final Evaluation <==
+2025-04-03 10:45:45,583 - INFO - TRAIN  AUC: 0.962  ACC: 0.876
+2025-04-03 10:45:46,729 - INFO - TEST  AUC: 0.588  ACC: 0.429
+2025-04-03 10:45:46,729 - INFO - Training complete. Best model: AUC 0.662, ACC 0.521
+2025-04-03 10:45:46,730 - INFO - Training process completed successfully
+2025-04-03 10:46:56,807 - INFO - Starting BloodMNIST ViT Training Pipeline
+2025-04-03 10:46:56,807 - INFO - Using device: cpu
+2025-04-03 10:46:56,807 - INFO - Initializing data pipelines...
+2025-04-03 10:46:58,066 - INFO - Building Vision Transformer...
+2025-04-03 10:46:58,092 - INFO - Beginning training process...
+2025-04-03 10:46:58,092 - INFO - Starting training...
+2025-04-03 10:47:32,682 - WARNING - Training interrupted by user
+2025-04-03 10:47:32,756 - INFO - Training process completed successfully
+2025-04-03 10:47:45,296 - INFO - Starting BloodMNIST ViT Training Pipeline
+2025-04-03 10:47:45,296 - INFO - Using device: cpu
+2025-04-03 10:47:45,296 - INFO - Initializing data pipelines...
+2025-04-03 10:47:46,606 - INFO - Building Vision Transformer...
+2025-04-03 10:47:46,632 - INFO - Beginning training process...
+2025-04-03 10:47:46,632 - INFO - Starting training...
+2025-04-03 10:50:28,676 - INFO - Epoch 1 - Train Loss: 1.0330
+2025-04-03 10:50:37,263 - INFO - TEST  AUC: 0.656  ACC: 0.383
+2025-04-03 10:50:37,295 - INFO - New best model saved with AUC: 0.656, ACC: 0.383
+2025-04-03 10:53:21,511 - INFO - Epoch 2 - Train Loss: 0.9913
+2025-04-03 10:53:31,050 - INFO - TEST  AUC: 0.655  ACC: 0.442
+2025-04-03 10:56:16,404 - INFO - Epoch 3 - Train Loss: 0.9641
+2025-04-03 10:56:25,258 - INFO - TEST  AUC: 0.669  ACC: 0.475
+2025-04-03 10:56:25,300 - INFO - New best model saved with AUC: 0.669, ACC: 0.475
+2025-04-03 10:59:06,397 - INFO - Epoch 4 - Train Loss: 0.9363
+2025-04-03 10:59:15,513 - INFO - TEST  AUC: 0.647  ACC: 0.392
+2025-04-03 11:02:00,564 - INFO - Epoch 5 - Train Loss: 0.9003
+2025-04-03 11:02:09,620 - INFO - TEST  AUC: 0.663  ACC: 0.496
+2025-04-03 11:04:49,636 - INFO - Epoch 6 - Train Loss: 0.8611
+2025-04-03 11:04:59,979 - INFO - TEST  AUC: 0.637  ACC: 0.438
+2025-04-03 11:07:44,622 - INFO - Epoch 7 - Train Loss: 0.8080
+2025-04-03 11:07:53,844 - INFO - TEST  AUC: 0.656  ACC: 0.479
+2025-04-03 11:10:38,379 - INFO - Epoch 8 - Train Loss: 0.7461
+2025-04-03 11:10:47,840 - INFO - TEST  AUC: 0.633  ACC: 0.429
+2025-04-03 11:13:37,207 - INFO - Epoch 9 - Train Loss: 0.7061
+2025-04-03 11:13:46,672 - INFO - TEST  AUC: 0.640  ACC: 0.463
+2025-04-03 11:16:36,837 - INFO - Epoch 10 - Train Loss: 0.6240
+2025-04-03 11:16:46,373 - INFO - TEST  AUC: 0.650  ACC: 0.479
+2025-04-03 11:16:46,373 - INFO - ==> Final Evaluation <==
+2025-04-03 11:17:25,874 - INFO - TRAIN  AUC: 0.935  ACC: 0.831
+2025-04-03 11:17:34,824 - INFO - TEST  AUC: 0.650  ACC: 0.479
+2025-04-03 11:17:34,824 - INFO - Training complete. Best model: AUC 0.669, ACC 0.475
+2025-04-03 11:17:34,826 - INFO - Training process completed successfully
+2025-04-03 11:30:40,457 - INFO - Starting BloodMNIST ViT Training Pipeline
+2025-04-03 11:30:40,458 - INFO - Using device: cpu
+2025-04-03 11:30:40,458 - INFO - Initializing data pipelines...
+2025-04-03 11:30:41,808 - INFO - Building Vision Transformer...
+2025-04-03 11:30:41,835 - INFO - Beginning training process...
+2025-04-03 11:30:41,835 - INFO - Starting training...
+2025-04-03 11:30:41,908 - ERROR - Training failed: cannot access local variable 'embeddings' where it is not associated with a value
+2025-04-03 11:30:41,908 - ERROR - Main execution failed: cannot access local variable 'embeddings' where it is not associated with a value
+2025-04-03 11:31:59,173 - INFO - Starting BloodMNIST ViT Training Pipeline
+2025-04-03 11:31:59,174 - INFO - Using device: cpu
+2025-04-03 11:31:59,174 - INFO - Initializing data pipelines...
+2025-04-03 11:32:00,591 - INFO - Building Vision Transformer...
+2025-04-03 11:32:00,618 - INFO - Beginning training process...
+2025-04-03 11:32:00,619 - INFO - Starting training...
+2025-04-03 11:32:08,713 - WARNING - Training interrupted by user
+2025-04-03 11:32:08,744 - INFO - Training process completed successfully
+2025-04-03 11:32:15,894 - INFO - Starting BloodMNIST ViT Training Pipeline
+2025-04-03 11:32:15,895 - INFO - Using device: cpu
+2025-04-03 11:32:15,895 - INFO - Initializing data pipelines...
+2025-04-03 11:32:17,231 - INFO - Building Vision Transformer...
+2025-04-03 11:32:17,258 - INFO - Beginning training process...
+2025-04-03 11:32:17,258 - INFO - Starting training...
+2025-04-03 11:34:49,377 - INFO - Epoch 1 - Train Loss: 1.0164
+2025-04-03 11:34:58,346 - INFO - TEST  AUC: 0.653  ACC: 0.467
+2025-04-03 11:34:58,375 - INFO - New best model saved with AUC: 0.653, ACC: 0.467
+2025-04-03 11:37:38,580 - INFO - Epoch 2 - Train Loss: 0.9916
+2025-04-03 11:37:47,362 - INFO - TEST  AUC: 0.652  ACC: 0.500
+2025-04-03 11:40:21,195 - INFO - Epoch 3 - Train Loss: 0.9651
+2025-04-03 11:40:30,108 - INFO - TEST  AUC: 0.668  ACC: 0.508
+2025-04-03 11:40:30,130 - INFO - New best model saved with AUC: 0.668, ACC: 0.508
+2025-04-03 11:43:04,803 - INFO - Epoch 4 - Train Loss: 0.9471
+2025-04-03 11:43:13,504 - INFO - TEST  AUC: 0.658  ACC: 0.467
+2025-04-03 11:45:47,865 - INFO - Epoch 5 - Train Loss: 0.9019
+2025-04-03 11:45:56,608 - INFO - TEST  AUC: 0.652  ACC: 0.438
+2025-04-03 11:48:40,367 - INFO - Epoch 6 - Train Loss: 0.8807
+2025-04-03 11:48:49,273 - INFO - TEST  AUC: 0.678  ACC: 0.454
+2025-04-03 11:48:49,295 - INFO - New best model saved with AUC: 0.678, ACC: 0.454
+2025-04-03 11:51:31,103 - INFO - Epoch 7 - Train Loss: 0.7942
+2025-04-03 11:51:40,013 - INFO - TEST  AUC: 0.697  ACC: 0.529
+2025-04-03 11:51:40,043 - INFO - New best model saved with AUC: 0.697, ACC: 0.529
+2025-04-03 11:54:14,494 - INFO - Epoch 8 - Train Loss: 0.7529
+2025-04-03 11:54:23,326 - INFO - TEST  AUC: 0.695  ACC: 0.525
+2025-04-03 11:56:58,509 - INFO - Epoch 9 - Train Loss: 0.6985
+2025-04-03 11:57:07,358 - INFO - TEST  AUC: 0.656  ACC: 0.483
+2025-04-03 11:59:50,342 - INFO - Epoch 10 - Train Loss: 0.6446
+2025-04-03 11:59:59,817 - INFO - TEST  AUC: 0.682  ACC: 0.483
+2025-04-03 11:59:59,818 - INFO - ==> Final Evaluation <==
+2025-04-03 12:00:38,591 - INFO - TRAIN  AUC: 0.936  ACC: 0.820
+2025-04-03 12:00:47,840 - INFO - TEST  AUC: 0.682  ACC: 0.483
+2025-04-03 12:00:47,841 - INFO - Training complete. Best model: AUC 0.697, ACC 0.529
+2025-04-03 12:00:47,842 - INFO - Training process completed successfully
+2025-04-03 14:04:20,235 - INFO - Starting BloodMNIST ViT Training Pipeline
+2025-04-03 14:04:20,236 - INFO - Using device: cpu
+2025-04-03 14:04:20,236 - INFO - Initializing data pipelines...
+2025-04-03 14:04:21,535 - INFO - Building Vision Transformer...
+2025-04-03 14:04:21,560 - INFO - Beginning training process...
+2025-04-03 14:04:21,561 - INFO - Starting training...
+2025-04-03 14:04:32,924 - WARNING - Training interrupted by user
+2025-04-03 14:04:32,939 - INFO - Training process completed successfully
+2025-04-03 14:05:40,720 - INFO - Starting FractureMNIST3D ViT Training Pipeline
+2025-04-03 14:05:40,721 - INFO - Using device: cpu
+2025-04-03 14:05:40,721 - INFO - Initializing data pipelines...
+2025-04-03 14:05:42,010 - INFO - Building Vision Transformer...
+2025-04-03 14:05:42,035 - INFO - Beginning training process...
+2025-04-03 14:05:42,036 - INFO - Starting training...
+2025-04-03 14:05:57,399 - INFO - Epoch 1 - Train Loss: 1.0308
+2025-04-03 14:05:58,346 - INFO - TEST  AUC: 0.660  ACC: 0.546
+2025-04-03 14:05:58,368 - INFO - New best model saved with AUC: 0.660, ACC: 0.546
+2025-04-03 14:06:13,843 - INFO - Epoch 2 - Train Loss: 0.9838
+2025-04-03 14:06:14,832 - INFO - TEST  AUC: 0.664  ACC: 0.454
+2025-04-03 14:06:14,856 - INFO - New best model saved with AUC: 0.664, ACC: 0.454
+2025-04-03 14:06:31,881 - INFO - Epoch 3 - Train Loss: 0.9625
+2025-04-03 14:06:32,974 - INFO - TEST  AUC: 0.654  ACC: 0.417
+2025-04-03 14:06:49,860 - INFO - Epoch 4 - Train Loss: 0.9477
+2025-04-03 14:06:50,949 - INFO - TEST  AUC: 0.678  ACC: 0.479
+2025-04-03 14:06:50,974 - INFO - New best model saved with AUC: 0.678, ACC: 0.479
+2025-04-03 14:07:08,038 - INFO - Epoch 5 - Train Loss: 0.8959
+2025-04-03 14:07:09,107 - INFO - TEST  AUC: 0.641  ACC: 0.471
+2025-04-03 14:07:09,108 - INFO - ==> Final Evaluation <==
+2025-04-03 14:07:13,500 - INFO - TRAIN  AUC: 0.806  ACC: 0.561
+2025-04-03 14:07:14,594 - INFO - TEST  AUC: 0.641  ACC: 0.471
+2025-04-03 14:07:14,594 - INFO - Training complete. Best model: AUC 0.678, ACC 0.479
+2025-04-03 14:07:14,595 - INFO - Training process completed successfully
+2025-04-03 15:11:29,518 - INFO - Starting FractureMNIST3D ViT Training Pipeline
+2025-04-03 15:11:29,519 - INFO - Using device: cpu
+2025-04-03 15:11:29,519 - INFO - Initializing data pipelines...
+2025-04-03 15:11:30,839 - INFO - Building Vision Transformer...
+2025-04-03 15:11:30,864 - INFO - Beginning training process...
+2025-04-03 15:11:30,864 - INFO - Starting training...
+2025-04-03 15:15:01,757 - INFO - Epoch 1 - Train Loss: 1.0358
+2025-04-03 15:15:13,437 - INFO - TEST  AUC: 0.609  ACC: 0.458
+2025-04-03 15:15:13,462 - INFO - New best model saved with AUC: 0.609, ACC: 0.458
+2025-04-03 15:24:01,407 - INFO - Epoch 2 - Train Loss: 1.0097
+2025-04-03 15:24:12,596 - INFO - TEST  AUC: 0.658  ACC: 0.479
+2025-04-03 15:24:12,616 - INFO - New best model saved with AUC: 0.658, ACC: 0.479
+2025-04-04 11:14:42,799 - INFO - Epoch 3 - Train Loss: 0.9715
+2025-04-04 11:14:55,079 - INFO - TEST  AUC: 0.658  ACC: 0.438
+2025-04-04 11:19:02,324 - INFO - Epoch 4 - Train Loss: 0.9634
+2025-04-04 11:19:15,198 - INFO - TEST  AUC: 0.672  ACC: 0.458
+2025-04-04 11:19:15,236 - INFO - New best model saved with AUC: 0.672, ACC: 0.458
+2025-04-04 11:23:04,524 - INFO - Epoch 5 - Train Loss: 0.9431
+2025-04-04 11:23:17,499 - INFO - TEST  AUC: 0.657  ACC: 0.417
+2025-04-04 11:27:05,809 - INFO - Epoch 6 - Train Loss: 0.9238
+2025-04-04 11:27:18,523 - INFO - TEST  AUC: 0.640  ACC: 0.479
+2025-04-04 11:31:07,304 - INFO - Epoch 7 - Train Loss: 0.8771
+2025-04-04 11:31:19,808 - INFO - TEST  AUC: 0.664  ACC: 0.483
+2025-04-04 11:35:13,936 - INFO - Epoch 8 - Train Loss: 0.8239
+2025-04-04 11:35:26,268 - INFO - TEST  AUC: 0.638  ACC: 0.500
+2025-04-04 11:39:15,544 - INFO - Epoch 9 - Train Loss: 0.7636
+2025-04-04 11:39:27,992 - INFO - TEST  AUC: 0.651  ACC: 0.442
+2025-04-04 11:43:21,123 - INFO - Epoch 10 - Train Loss: 0.6777
+2025-04-04 11:43:34,436 - INFO - TEST  AUC: 0.658  ACC: 0.546
+2025-04-04 11:47:35,039 - INFO - Epoch 11 - Train Loss: 0.6289
+2025-04-04 11:47:47,504 - INFO - TEST  AUC: 0.669  ACC: 0.512
+2025-04-04 11:51:38,390 - INFO - Epoch 12 - Train Loss: 0.4843
+2025-04-04 11:51:50,838 - INFO - TEST  AUC: 0.621  ACC: 0.517
+2025-04-04 11:55:42,025 - INFO - Epoch 13 - Train Loss: 0.3834
+2025-04-04 11:55:54,864 - INFO - TEST  AUC: 0.642  ACC: 0.483
+2025-04-04 11:59:45,083 - INFO - Epoch 14 - Train Loss: 0.3665
+2025-04-04 11:59:58,001 - INFO - TEST  AUC: 0.625  ACC: 0.438
+2025-04-04 12:09:09,220 - INFO - Epoch 15 - Train Loss: 0.2990
+2025-04-04 12:09:21,780 - INFO - TEST  AUC: 0.674  ACC: 0.508
+2025-04-04 12:09:21,816 - INFO - New best model saved with AUC: 0.674, ACC: 0.508
+2025-04-04 12:09:21,816 - INFO - ==> Final Evaluation <==
+2025-04-04 12:10:12,625 - INFO - TRAIN  AUC: 0.997  ACC: 0.956
+2025-04-04 12:10:25,038 - INFO - TEST  AUC: 0.674  ACC: 0.508
+2025-04-04 12:10:25,039 - INFO - Training complete. Best model: AUC 0.674, ACC 0.508
+2025-04-04 12:10:25,040 - INFO - Training process completed successfully
+2025-04-07 14:59:49,702 - INFO - Starting BloodMNIST ViT Training Pipeline
+2025-04-07 14:59:49,703 - INFO - Using device: cpu
+2025-04-07 14:59:49,703 - INFO - Initializing data pipelines...
+2025-04-07 14:59:50,116 - INFO - Building Vision Transformer...
+2025-04-07 14:59:50,116 - ERROR - Main execution failed: GCViT.__init__() missing 4 required positional arguments: 'dim', 'depths', 'mlp_ratio', and 'num_heads'
+2025-04-07 15:02:37,145 - INFO - Starting BloodMNIST ViT Training Pipeline
+2025-04-07 15:02:37,146 - INFO - Using device: cpu
+2025-04-07 15:02:37,146 - INFO - Initializing data pipelines...
+2025-04-07 15:02:37,576 - INFO - Building Vision Transformer...
+2025-04-07 15:02:37,577 - ERROR - Main execution failed: object of type 'int' has no len()
+2025-04-07 15:04:14,593 - INFO - Starting BloodMNIST ViT Training Pipeline
+2025-04-07 15:04:14,594 - INFO - Using device: cpu
+2025-04-07 15:04:14,594 - INFO - Initializing data pipelines...
+2025-04-07 15:04:14,999 - INFO - Building Vision Transformer...
+2025-04-07 15:04:15,253 - ERROR - Main execution failed: list index out of range
+2025-04-07 15:04:49,167 - INFO - Starting BloodMNIST ViT Training Pipeline
+2025-04-07 15:04:49,167 - INFO - Using device: cpu
+2025-04-07 15:04:49,167 - INFO - Initializing data pipelines...
+2025-04-07 15:04:49,619 - INFO - Building Vision Transformer...
+2025-04-07 15:04:49,632 - ERROR - Main execution failed: 0.0 cannot be raised to a negative power
+2025-04-07 15:08:24,164 - INFO - Starting BloodMNIST ViT Training Pipeline
+2025-04-07 15:08:24,165 - INFO - Using device: cpu
+2025-04-07 15:08:24,165 - INFO - Initializing data pipelines...
+2025-04-07 15:08:24,592 - INFO - Building Vision Transformer...
+2025-04-07 15:08:24,595 - ERROR - Main execution failed: 0.0 cannot be raised to a negative power
+2025-04-07 15:09:23,553 - INFO - Starting BloodMNIST ViT Training Pipeline
+2025-04-07 15:09:23,553 - INFO - Using device: cpu
+2025-04-07 15:09:23,553 - INFO - Initializing data pipelines...
+2025-04-07 15:09:23,956 - INFO - Building Vision Transformer...
+2025-04-07 15:09:24,194 - ERROR - Main execution failed: list index out of range
+2025-04-07 15:10:37,582 - INFO - Starting BloodMNIST ViT Training Pipeline
+2025-04-07 15:10:37,582 - INFO - Using device: cpu
+2025-04-07 15:10:37,582 - INFO - Initializing data pipelines...
+2025-04-07 15:10:37,980 - INFO - Building Vision Transformer...
+2025-04-07 15:10:38,214 - ERROR - Main execution failed: list index out of range
+2025-04-07 15:12:16,098 - INFO - Starting BloodMNIST ViT Training Pipeline
+2025-04-07 15:12:16,099 - INFO - Using device: cpu
+2025-04-07 15:12:16,099 - INFO - Initializing data pipelines...
+2025-04-07 15:12:16,507 - INFO - Building Vision Transformer...
+2025-04-07 15:12:16,766 - INFO - Beginning training process...
+2025-04-07 15:12:16,766 - INFO - Starting training...
+2025-04-07 15:12:50,129 - INFO - Starting BloodMNIST ViT Training Pipeline
+2025-04-07 15:12:50,130 - INFO - Using device: cpu
+2025-04-07 15:12:50,130 - INFO - Initializing data pipelines...
+2025-04-07 15:12:50,541 - INFO - Building Vision Transformer...
+2025-04-07 15:12:50,800 - INFO - Beginning training process...
+2025-04-07 15:12:50,800 - INFO - Starting training...
+2025-04-07 15:15:59,009 - INFO - Starting BloodMNIST GCViT Training Pipeline
+2025-04-07 15:15:59,009 - INFO - Using device: cpu
+2025-04-07 15:15:59,009 - INFO - Initializing data pipelines...
+2025-04-07 15:15:59,466 - INFO - Building Global Context Vision Transformer...
+2025-04-07 15:15:59,507 - INFO - Beginning training process...
+2025-04-07 15:15:59,507 - INFO - Starting training...
+2025-04-07 15:16:00,897 - ERROR - Training failed: cross_entropy_loss(): argument 'input' (position 1) must be Tensor, not list
+2025-04-07 15:16:00,897 - ERROR - Main execution failed: cross_entropy_loss(): argument 'input' (position 1) must be Tensor, not list
