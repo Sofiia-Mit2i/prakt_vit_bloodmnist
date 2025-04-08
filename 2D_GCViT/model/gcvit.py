@@ -9,10 +9,11 @@ class GCViT(nn.Module):
     def __init__(self,
                  dim, #embedding dimension
                  depths, #tuple of ints, number of transformer blocks at each level
-                 mlp_ratio,
-                 num_heads,
-                 window_size=(24, 24, 24, 24),
-                 window_size_pre=(7, 7, 14, 7),
+                 mlp_ratio, #multiplier for dim of mlp hidden layers
+                 num_heads, #tupleof ints, number of attention heads in each level
+                 num_classes,
+                 window_size=(24, 24, 24, 24), #window size at each level, same length as depths
+                 window_size_pre=(12, 12, 12, 12), #window size for pre
                  resolution=28,
                  drop_path_rate=0.2,
                  in_chans=3,
@@ -22,7 +23,7 @@ class GCViT(nn.Module):
                  attn_drop_rate=0.,
                  norm_layer=nn.LayerNorm,
                  layer_scale=None,
-                 out_indices=(0, 1, 2, 3),
+                 out_indices=(0,1,2,3),
                  frozen_stages=-1,
                  pretrained=None,
                  use_rel_pos_bias=True,
@@ -78,6 +79,12 @@ class GCViT(nn.Module):
                 relative_position_bias_table_pretrained_resized = relative_position_bias_table_pretrained_resized.view(nH1, L2).permute(1, 0)
                 block.attn.relative_position_bias_table = torch.nn.Parameter(relative_position_bias_table_pretrained_resized)
 
+        # Classification head: 
+        # Global Average Pooling layer that converts [B, C, H, W] -> [B, C]
+        self.pool = nn.AdaptiveAvgPool2d((1, 1))
+        # Fully connected layer for classification
+        self.classifier = nn.Linear(self.num_features[-1], num_classes)
+
     def forward_embeddings(self, x):
         x = self.patch_embed(x)
         return x
@@ -94,7 +101,19 @@ class GCViT(nn.Module):
 
     def forward(self, x):
         x = self.forward_embeddings(x)
-        return self.forward_tokens(x)
+        outs = self.forward_tokens(x)
+
+        # Use the final output from the last level for classification
+        final_output = outs[-1]  # Expected shape: [batch_size, channels, H, W]
+        
+        # Apply Global Average Pooling to reduce [B, C, H, W] to [B, C]
+        pooled_output = self.pool(final_output)  # Now shape is [B, C, 1, 1]
+        pooled_output = pooled_output.view(pooled_output.size(0), -1)  # Flatten to [B, C]
+        
+        # Apply the classifier head to get logits for each class
+        logits = self.classifier(pooled_output)  # Output shape: [B, num_classes]
+        
+        return logits
 
     def forward_features(self, x):
         x = self.forward_embeddings(x)

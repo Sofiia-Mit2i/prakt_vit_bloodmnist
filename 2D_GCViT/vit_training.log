@@ -6,3 +6,23 @@
 2025-04-08 10:10:25,684 - INFO - Starting training...
 2025-04-08 10:10:27,440 - ERROR - Training failed: cross_entropy_loss(): argument 'input' (position 1) must be Tensor, not list
 2025-04-08 10:10:27,440 - ERROR - Main execution failed: cross_entropy_loss(): argument 'input' (position 1) must be Tensor, not list
+2025-04-08 13:39:25,880 - INFO - Starting BloodMNIST GCViT Training Pipeline
+2025-04-08 13:39:25,880 - INFO - Using device: cpu
+2025-04-08 13:39:25,881 - INFO - Initializing data pipelines...
+2025-04-08 13:39:26,306 - INFO - Building Global Context Vision Transformer...
+2025-04-08 13:39:26,359 - INFO - Beginning training process...
+2025-04-08 13:39:26,359 - INFO - Starting training...
+2025-04-08 13:46:34,957 - INFO - Epoch 1 - Train Loss: 0.8189
+2025-04-08 13:47:18,441 - INFO - TEST  AUC: 0.969  ACC: 0.781
+2025-04-08 13:47:18,475 - INFO - New best model saved with AUC: 0.969, ACC: 0.781
+2025-04-08 13:54:39,120 - INFO - Epoch 2 - Train Loss: 0.4650
+2025-04-08 13:55:15,923 - INFO - TEST  AUC: 0.986  ACC: 0.868
+2025-04-08 13:55:15,953 - INFO - New best model saved with AUC: 0.986, ACC: 0.868
+2025-04-08 14:01:58,656 - INFO - Epoch 3 - Train Loss: 0.3459
+2025-04-08 14:02:36,165 - INFO - TEST  AUC: 0.989  ACC: 0.890
+2025-04-08 14:02:36,198 - INFO - New best model saved with AUC: 0.989, ACC: 0.890
+2025-04-08 14:02:36,198 - INFO - ==> Final Evaluation <==
+2025-04-08 14:04:44,256 - INFO - TRAIN  AUC: 0.993  ACC: 0.915
+2025-04-08 14:05:21,386 - INFO - TEST  AUC: 0.989  ACC: 0.890
+2025-04-08 14:05:21,386 - INFO - Training complete. Best model: AUC 0.989, ACC 0.890
+2025-04-08 14:05:21,399 - INFO - Training process completed successfully

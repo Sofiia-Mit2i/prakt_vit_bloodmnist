@@ -30,7 +30,7 @@ def main():
         'num_workers': 4,
         'lr': 3e-4,
         'weight_decay': 0.01,
-        'num_epochs': 5,
+        'num_epochs': 3,
         'num_classes': 8  # BloodMNIST has 8 classes
     }
     
@@ -44,11 +44,26 @@ def main():
         
         # Model initialization
         logging.info("Building Global Context Vision Transformer...")
-        model = GCViT(dim = 64,
-                 depths = (1,1),
-                 mlp_ratio = 4,
-                 num_heads = (2,2),
-                 out_indices=(0,1))
+        model = GCViT(dim = 56, #embedding dimension
+                 depths = (2,2,2,2), #tuple of ints, number of transformer blocks at each level
+                 mlp_ratio = 2, #multiplier for dim of mlp hidden layers
+                 num_heads = (4,4,4,4), #tuple of ints, number of attention heads in each level
+                 num_classes = 8,
+                 window_size=(14, 14, 14, 14), #window size at each level, same length as depths
+                 window_size_pre=(7, 7, 14, 7), #window size for preprocessing
+                 resolution=28,
+                 drop_path_rate=0.2,
+                 in_chans=3,
+                 qkv_bias=True,
+                 qk_scale=None,
+                 drop_rate=0.,
+                 attn_drop_rate=0.,
+                 norm_layer=nn.LayerNorm,
+                 layer_scale=None,
+                 out_indices=(0,1,2,3),
+                 frozen_stages=-1,
+                 pretrained=None,
+                 use_rel_pos_bias=True)
         
         # Initialize trainer
         trainer = GCViTTrainer(
