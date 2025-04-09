@@ -16,7 +16,7 @@ class GCViT(nn.Module):
                  window_size_pre=(12, 12, 12, 12), #window size for pre
                  resolution=28,
                  drop_path_rate=0.2,
-                 in_chans=3,
+                 in_chans=1,
                  qkv_bias=True,
                  qk_scale=None,
                  drop_rate=0.,
