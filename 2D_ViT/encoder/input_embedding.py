@@ -33,7 +33,7 @@ class InputEmbedding(nn.Module):
                    
         # 3. Positional Embeddings (learnable position information)
         self.pos_embedding = nn.Parameter(
-            torch.randn(1, self.num_patches + 1, latent_size)
+            torch.randn(1, self.num_patches, latent_size)
         )
         
         # 4. Dropout for regularization
@@ -59,12 +59,12 @@ class InputEmbedding(nn.Module):
         # 2. Linear projection of patches
         embeddings = self.patch_embedding(patches)  # (b, n_patches, latent_size)
         
+        # 3. Add positional embeddings
+        embeddings += self.pos_embedding
+
         # 3. Add class token to beginning of sequence
         class_tokens = self.class_token.expand(batch_size, -1, -1)
         embeddings = torch.cat([class_tokens, embeddings], dim=1)
-        
-        # 4. Add positional embeddings
-        embeddings += self.pos_embedding
         
         # 5. Apply dropout
         return self.dropout(embeddings)
