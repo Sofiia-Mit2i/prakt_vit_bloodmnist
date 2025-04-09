@@ -77,23 +77,24 @@ class GCViTBlock(nn.Module):
             self.gamma2 = 1.0
 
     def forward(self, x, q_global):
-        B, H, W, C = x.shape
+        B, H, W, D, C = x.shape
         shortcut = x
         x = self.norm1(x)
-        pad_l = pad_t = 0
-        pad_r = (self.window_size - W % self.window_size) % self.window_size
-        pad_b = (self.window_size - H % self.window_size) % self.window_size
-        x = F.pad(x, (0, 0, pad_l, pad_r, pad_t, pad_b))
-        _, Hp, Wp, _ = x.shape
+        pad_w_l = pad_h_t = pad_d_f = 0
+        pad_w_r = (self.window_size - W % self.window_size) % self.window_size
+        pad_h_b = (self.window_size - H % self.window_size) % self.window_size
+        pad_d_b = (self.window_size - D % self.window_size) % self.window_size
+        x = F.pad(x, (0, 0, pad_d_f, pad_d_b, pad_w_l, pad_w_r, pad_h_t, pad_h_b)) #back to front
+        _, Hp, Wp, Dp, _ = x.shape
         shifted_x = x
-        x_windows = window_partition(shifted_x, self.window_size)  # nW*B, window_size, window_size, C
-        x_windows = x_windows.view(-1, self.window_size * self.window_size, C)
-        _, h, w = x_windows.shape
+        x_windows = window_partition(shifted_x, self.window_size)  # nW*B, window_size, window_size, window_size, C
+        x_windows = x_windows.view(-1, self.window_size * self.window_size * self.window_size, C)
+        _, h, w, d = x_windows.shape
         attn_windows = self.attn(x_windows, q_global)
-        shifted_x = window_reverse(attn_windows, self.window_size, Hp, Wp)  # B H' W' C
+        shifted_x = window_reverse(attn_windows, self.window_size, Hp, Wp, Dp)  # B H' W' D' C
         x = shifted_x
-        if pad_r > 0 or pad_b > 0:
-            x = x[:, :H, :W, :].contiguous()
+        if pad_w_r > 0 or pad_h_b > 0 or pad_d_b > 0:
+            x = x[:, :H, :W, :D, :].contiguous()
         x = shortcut + self.drop_path(self.gamma1 * x)
         x = x + self.drop_path(self.gamma2 * self.mlp(self.norm2(x)))
         return x
