@@ -36,21 +36,24 @@ class WindowAttention(nn.Module):
         self.scale = qk_scale or head_dim ** -0.5
         self.use_rel_pos_bias = use_rel_pos_bias
         self.window_size_pre = window_size_pre
-        self.window_size = (window_size, window_size)  # Wh, Ww
-        window_size = (window_size_pre, window_size_pre)
+        self.window_size = (window_size, window_size, window_size)  # Wh, Ww, Wd
+        window_size = (window_size_pre, window_size_pre, window_size_pre)
         self.relative_position_bias_table = nn.Parameter(
-            torch.zeros((2 * window_size[0] - 1) * (2 * window_size[1] - 1), num_heads))  # 2*Wh-1 * 2*Ww-1, nH
+            torch.zeros((2 * window_size[0] - 1) * (2 * window_size[1] - 1) * (2 * window_size[2] - 1), num_heads))  # 2*Wh-1 * 2*Ww-1 * 2*Wd-1, nH
         # get pair-wise relative position index for each token inside the window
         coords_h = torch.arange(self.window_size[0])
         coords_w = torch.arange(self.window_size[1])
-        coords = torch.stack(torch.meshgrid([coords_h, coords_w]))  # 2, Wh, Ww
-        coords_flatten = torch.flatten(coords, 1)  # 2, Wh*Ww
-        relative_coords = coords_flatten[:, :, None] - coords_flatten[:, None, :]  # 2, Wh*Ww, Wh*Ww
-        relative_coords = relative_coords.permute(1, 2, 0).contiguous()  # Wh*Ww, Wh*Ww, 2
+        coords_d = torch.arange(self.window_size[2])
+        coords = torch.stack(torch.meshgrid([coords_h, coords_w, coords_d]))  # 3, Wh, Ww, Wd
+        coords_flatten = torch.flatten(coords, 1)  # 3, Wh*Ww*Wd
+        relative_coords = coords_flatten[:, :, None] - coords_flatten[:, None, :]  # 3, Wh*Ww*Wd, Wh*Ww*Wd
+        relative_coords = relative_coords.permute(1, 2, 0).contiguous()  # Wh*Ww*Wd, Wh*Ww*Wd, 3
         relative_coords[:, :, 0] += self.window_size[0] - 1  # shift to start from 0
         relative_coords[:, :, 1] += self.window_size[1] - 1
-        relative_coords[:, :, 0] *= 2 * self.window_size[1] - 1
-        relative_position_index = relative_coords.sum(-1)  # Wh*Ww, Wh*Ww
+        relative_coords[:, :, 2] += self.window_size[2] - 1
+        relative_coords[:, :, 0] *= (2 * self.window_size[1] - 1) * (2 * self.window_size[2] - 1) # scaling for unique sum
+        relative_coords[:, :, 1] *= 2 * self.window_size[2] - 1
+        relative_position_index = relative_coords.sum(-1)  # Wh*Ww*Wd, Wh*Ww*Wd
         self.register_buffer("relative_position_index", relative_position_index)
         self.qkv = nn.Linear(dim, dim * 3, bias=qkv_bias)
         self.attn_drop = nn.Dropout(attn_drop)
@@ -62,14 +65,15 @@ class WindowAttention(nn.Module):
         B_, N, C = x.shape
         head_dim = C // self.num_heads
         qkv = self.qkv(x).reshape(B_, N, 3, self.num_heads, head_dim).permute(2, 0, 3, 1, 4)
-        q, k, v = qkv[0], qkv[1], qkv[2]
+        q, k, v = qkv[0], qkv[1], qkv[2] # (B_, num_heads, N, head_dim) 
         q = q * self.scale
-        attn = (q @ k.transpose(-2, -1))
+        attn = (q @ k.transpose(-2, -1)) #swaps last 2 dims -->attention for all heads and batches
         if self.use_rel_pos_bias:
             relative_position_bias = self.relative_position_bias_table[self.relative_position_index.view(-1)].view(
-                self.window_size[0] * self.window_size[1], self.window_size[0] * self.window_size[1],
-                -1)  # Wh*Ww,Wh*Ww,nH
-            relative_position_bias = relative_position_bias.permute(2, 0, 1).contiguous()  # nH, Wh*Ww, Wh*Ww
+                self.window_size[0] * self.window_size[1] * self.window_size[2], 
+                self.window_size[0] * self.window_size[1] * self.window_size[2],
+                -1)  # Wh*Ww*Wd,Wh*Ww*Wd,nH
+            relative_position_bias = relative_position_bias.permute(2, 0, 1).contiguous()  # nH, Wh*Ww*Wd, Wh*Ww*Wd
             attn = attn + relative_position_bias.unsqueeze(0)
         attn = self.softmax(attn)
         attn = self.attn_drop(attn)
