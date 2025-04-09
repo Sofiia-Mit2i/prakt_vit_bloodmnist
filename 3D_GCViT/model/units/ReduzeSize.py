@@ -22,17 +22,17 @@ class ReduceSize(nn.Module):
 
         super().__init__()
         self.conv = nn.Sequential(
-            nn.Conv2d(dim, dim, kernel_size= 3,stride= 1,padding= 1,
+            nn.Conv3d(dim, dim, kernel_size= 3,stride= 1,padding= 1,
                       groups=dim, bias=False),
             nn.GELU(),
             SE(dim, dim),
-            nn.Conv2d(dim, dim, 1, 1, 0, bias=False),
+            nn.Conv3d(dim, dim, 1, 1, 0, bias=False),
         )
         if keep_dim:
             dim_out = dim
         else:
             dim_out = 2 * dim
-        self.reduction = nn.Conv2d(dim, dim_out, 3, 2, 1, bias=False)
+        self.reduction = nn.Conv3d(dim, dim_out, 3, 2, 1, bias=False)
         self.norm2 = norm_layer(dim_out)
         self.norm1 = norm_layer(dim)
 

@@ -18,7 +18,7 @@ class PatchEmbed(nn.Module):
         """
 
         super().__init__()
-        self.proj = nn.Conv2d(in_chans, dim, 3, 2, 1)
+        self.proj = nn.Conv3d(in_chans, dim, 3, 2, 1)
         self.conv_down = ReduceSize(dim=dim, keep_dim=True)
 
     def forward(self, x):
