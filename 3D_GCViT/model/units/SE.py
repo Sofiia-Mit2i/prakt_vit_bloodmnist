@@ -19,7 +19,7 @@ class SE(nn.Module):
         """
 
         super().__init__()
-        self.avg_pool = nn.AdaptiveAvgPool2d(1)
+        self.avg_pool = nn.AdaptiveAvgPool3d(1)
         self.fc = nn.Sequential(
             nn.Linear(oup, int(inp * expansion), bias=False),
             nn.GELU(),
@@ -28,7 +28,7 @@ class SE(nn.Module):
         )
 
     def forward(self, x):
-        b, c, _, _ = x.size()
+        b, c, _, _, _ = x.size()
         y = self.avg_pool(x).view(b, c)
-        y = self.fc(y).view(b, c, 1, 1)
+        y = self.fc(y).view(b, c, 1, 1, 1)
         return x * y

@@ -41,7 +41,7 @@ use_rel_pos_bias=True
 
 
 # Create a dummy input tensor (e.g., batch size of 1, 3 channels, 224x224 resolution)
-x = torch.randn(1, in_chans, resolution, resolution)
+x = torch.randn(1, in_chans, resolution, resolution, resolution)
 
 # Initialize the model
 model = GCViT(
@@ -49,6 +49,7 @@ model = GCViT(
     depths=depths,
     mlp_ratio=mlp_ratio,
     num_heads=num_heads,
+    num_classes=3,
     window_size=window_size,
     window_size_pre=window_size_pre,
     resolution=resolution,
