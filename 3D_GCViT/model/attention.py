@@ -117,21 +117,24 @@ class WindowAttentionGlobal(nn.Module):
         self.scale = qk_scale or head_dim ** -0.5
         self.use_rel_pos_bias = use_rel_pos_bias
         self.window_size_pre = window_size_pre
-        self.window_size = (window_size, window_size)  # Wh, Ww
-        window_size = (window_size_pre, window_size_pre)
+        self.window_size = (window_size, window_size, window_size)  # Wh, Ww, Wd
+        window_size = (window_size_pre, window_size_pre, window_size_pre)
         self.relative_position_bias_table = nn.Parameter(
-            torch.zeros((2 * window_size[0] - 1) * (2 * window_size[1] - 1), num_heads))  # 2*Wh-1 * 2*Ww-1, nH
+            torch.zeros((2 * window_size[0] - 1) * (2 * window_size[1] - 1) * (2 * window_size[2] - 1), num_heads))  # 2*Wh-1 * 2*Ww-1 * 2*Wd-1, nH
         # get pair-wise relative position index for each token inside the window
         coords_h = torch.arange(self.window_size[0])
         coords_w = torch.arange(self.window_size[1])
-        coords = torch.stack(torch.meshgrid([coords_h, coords_w]))  # 2, Wh, Ww
-        coords_flatten = torch.flatten(coords, 1)  # 2, Wh*Ww
-        relative_coords = coords_flatten[:, :, None] - coords_flatten[:, None, :]  # 2, Wh*Ww, Wh*Ww
-        relative_coords = relative_coords.permute(1, 2, 0).contiguous()  # Wh*Ww, Wh*Ww, 2
+        coords_d = torch.arange(self.window_size[2])
+        coords = torch.stack(torch.meshgrid([coords_h, coords_w, coords_d]))  # 2, Wh, Ww, Wd
+        coords_flatten = torch.flatten(coords, 1)  # 2, Wh*Ww*Wd
+        relative_coords = coords_flatten[:, :, None] - coords_flatten[:, None, :]  # 3, Wh*Ww*Wd, Wh*Ww*Wd
+        relative_coords = relative_coords.permute(1, 2, 0).contiguous()  # Wh*Ww*Wd, Wh*Ww*Wd, 2
         relative_coords[:, :, 0] += self.window_size[0] - 1  # shift to start from 0
         relative_coords[:, :, 1] += self.window_size[1] - 1
-        relative_coords[:, :, 0] *= 2 * self.window_size[1] - 1
-        relative_position_index = relative_coords.sum(-1)  # Wh*Ww, Wh*Ww
+        relative_coords[:, :, 2] += self.window_size[2] - 1
+        relative_coords[:, :, 0] *= (2 * self.window_size[1] - 1) * (2 * self.window_size[2] - 1) # scaling for unique sum
+        relative_coords[:, :, 1] *= 2 * self.window_size[2] - 1
+        relative_position_index = relative_coords.sum(-1)  # Wh*Ww*Wd, Wh*Ww*Wd
         self.register_buffer("relative_position_index", relative_position_index)
         self.qkv = nn.Linear(dim, dim * 2, bias=qkv_bias)
         self.attn_drop = nn.Dropout(attn_drop)
@@ -152,9 +155,10 @@ class WindowAttentionGlobal(nn.Module):
         attn = (q @ k.transpose(-2, -1))
         if self.use_rel_pos_bias:
             relative_position_bias = self.relative_position_bias_table[self.relative_position_index.view(-1)].view(
-                self.window_size[0] * self.window_size[1], self.window_size[0] * self.window_size[1],
-                -1)  # Wh*Ww,Wh*Ww,nH
-            relative_position_bias = relative_position_bias.permute(2, 0, 1).contiguous()  # nH, Wh*Ww, Wh*Ww
+                self.window_size[0] * self.window_size[1] * self.window_size[2],
+                self.window_size[0] * self.window_size[1] * self.window_size[2],
+                -1)  # Wh*Ww*Wd,Wh*Ww*Wd,nH
+            relative_position_bias = relative_position_bias.permute(2, 0, 1).contiguous()  # nH, Wh*Ww*Wd, Wh*Ww*Wd
             attn = attn + relative_position_bias.unsqueeze(0)
 
         attn = self.softmax(attn)
@@ -168,30 +172,42 @@ class WindowAttentionGlobal(nn.Module):
 def window_partition(x, window_size):
     """
     Args:
-        x: (B, H, W, C)
+        x: (B, H, W, D, C)
         window_size (int): window size
 
     Returns:
-        windows: (num_windows*B, window_size, window_size, C)
+        windows: (num_windows*B, window_size, window_size, window_size, C)
     """
-    B, H, W, C = x.shape
-    x = x.view(B, H // window_size, window_size, W // window_size, window_size, C)
-    windows = x.permute(0, 1, 3, 2, 4, 5).contiguous().view(-1, window_size, window_size, C)
+    B, H, W, D, C = x.shape
+    x = x.view(B, 
+               H // window_size, window_size,
+               W // window_size, window_size,
+               D // window_size, window_size,
+               C)
+    windows = x.permute(0, 1, 3, 5, 2, 4, 6, 7).contiguous().view(-1, window_size, window_size, window_size, C)
     return windows
 
 
-def window_reverse(windows, window_size, H, W):
+def window_reverse(windows, window_size, H, W, D):
     """
     Args:
-        windows: (num_windows*B, window_size, window_size, C)
+        windows: (num_windows*B, window_size, window_size, window_size, C)
         window_size (int): Window size
         H (int): Height of image
         W (int): Width of image
+        D (int): Depth of image
 
     Returns:
-        x: (B, H, W, C)
+        x: (B, H, W, D, C)
     """
-    B = int(windows.shape[0] / (H * W / window_size / window_size))
-    x = windows.view(B, H // window_size, W // window_size, window_size, window_size, -1)
-    x = x.permute(0, 1, 3, 2, 4, 5).contiguous().view(B, H, W, -1)
+    B = int(windows.shape[0] / (H * W * D / window_size * window_size * window_size))
+    x = windows.view(B,
+                     H // window_size, 
+                     W // window_size, 
+                     D //window_size,
+                     window_size,
+                     window_size,
+                     window_size,
+                     -1)
+    x = x.permute(0, 1, 4, 2, 5, 3, 6, 7).contiguous().view(B, H, W, D, -1)
     return x
