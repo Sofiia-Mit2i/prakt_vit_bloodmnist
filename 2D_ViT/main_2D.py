@@ -32,7 +32,7 @@ def main():
         'num_workers': 4,
         'lr': 3e-4,
         'weight_decay': 0.01,
-        'num_epochs': 50,
+        'num_epochs': 3,
         'num_classes': 8  # BloodMNIST has 8 classes
     }
     
