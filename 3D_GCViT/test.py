@@ -1,71 +1,60 @@
 import torch
-from torch import nn
-from model.embedding import PatchEmbed
-from model.layer import GCViTLayer
-from model.gcvit import GCViT  # Assuming the model is in 'gcvit.py'
+from torch.utils.data import DataLoader
+from medmnist import FractureMNIST3D
+import numpy as np
 
-# Set some hyperparameters for testing
-'''
-dim = 64  # Embedding dimension
-depths = [2, 2, 2, 2]  # Number of layers per level
-mlp_ratio = 4  # MLP ratio
-num_heads = [4, 8, 16, 32]  # Number of attention heads for each level
-window_size = (24, 24, 24, 24)  # Assuming 4D window size for 3D data
-window_size_pre = (7, 7, 14, 7)  # Predefined window sizes for the attention
-resolution = 224  # Image resolution
-drop_path_rate = 0.2  # Drop path rate
-in_chans = 3  # Number of input channels (for RGB images)
-out_indices = (0, 1, 2, 3)  # Output indices for each stage
-use_rel_pos_bias = True  # Using relative position bias
-'''
+def print_dataset_stats(dataset, name):
+    print(f"\n===== {name} Dataset Statistics =====")
+    print(f"Number of samples: {len(dataset)}")
+    
+    # Get first sample
+    img, label = dataset[0]
+    
+    # Print shapes and types
+    print(f"\nImage shape: {img.shape} (C×D×H×W)")
+    print(f"Label shape: {label.shape}")
+    print(f"Image dtype: {img.dtype}")
+    print(f"Label dtype: {label.dtype}")
+    
+    # Print value ranges
+    print(f"\nImage value range: {img.min().item():.4f} to {img.max().item():.4f}")
+    print(f"Unique labels: {torch.unique(torch.tensor([dataset[i][1] for i in range(len(dataset))]))}")
+    
+    # Print volumetric stats
+    if len(img.shape) == 4:  # 3D data
+        print("\nVolumetric statistics:")
+        print(f"Depth (slices): {img.shape[1]}")
+        print(f"Height: {img.shape[2]}")
+        print(f"Width: {img.shape[3]}")
+        print(f"Voxel count: {np.prod(img.shape)}")
 
-dim = 56    
-depths = (2,2,2,2)
-mlp_ratio = 2
-num_heads = (4,4,4,4) 
-window_size=(14, 14, 14, 14)
-window_size_pre=(7, 7, 14, 7)
-resolution=28
-drop_path_rate=0.2
-in_chans=3
-qkv_bias=True
-qk_scale=None
-drop_rate=0.
-attn_drop_rate=0.
-norm_layer=nn.LayerNorm
-layer_scale=None
-out_indices=(0, 1, 2, 3)
-frozen_stages=-1
-pretrained=None
-use_rel_pos_bias=True
+def main():
+    # Initialize dataset
+    train_dataset = FractureMNIST3D(split='train', download=True)
+    test_dataset = FractureMNIST3D(split='test', download=True)
+    
+    # Print dataset stats
+    print_dataset_stats(train_dataset, "Training")
+    print_dataset_stats(test_dataset, "Test")
+    
+    # Create DataLoader and check batch sizes
+    train_loader = DataLoader(train_dataset, batch_size=4, shuffle=True)
+    test_loader = DataLoader(test_dataset, batch_size=4)
+    
+    # Check first batch
+    train_batch = next(iter(train_loader))
+    print("\n===== DataLoader Batch Check =====")
+    print(f"Train batch images shape: {train_batch[0].shape} (B×C×D×H×W)")
+    print(f"Train batch labels shape: {train_batch[1].shape}")
+    print(f"Batch dtype: {train_batch[0].dtype}")
+    
+    # Verify normalization
+    print("\nBatch value range:")
+    print(f"Min: {train_batch[0].min().item():.4f}")
+    print(f"Max: {train_batch[0].max().item():.4f}")
+    print(f"Mean: {train_batch[0].mean().item():.4f}")
+    print(f"Std: {train_batch[0].std().item():.4f}")
 
-
-# Create a dummy input tensor (e.g., batch size of 1, 3 channels, 224x224 resolution)
-x = torch.randn(1, in_chans, resolution, resolution, resolution)
-
-# Initialize the model
-model = GCViT(
-    dim=dim,
-    depths=depths,
-    mlp_ratio=mlp_ratio,
-    num_heads=num_heads,
-    num_classes=3,
-    window_size=window_size,
-    window_size_pre=window_size_pre,
-    resolution=resolution,
-    drop_path_rate=drop_path_rate,
-    in_chans=in_chans,
-    out_indices=out_indices,
-    use_rel_pos_bias=use_rel_pos_bias
-)
-
-# Print the model summary
-print(model)
-
-# Forward pass
-output = model(x)
-
-# Check the output shape
-print("Output shapes for each level:")
-for i, out in enumerate(output):
-    print(f"Level {i} output shape: {out.shape}")
+if __name__ == "__main__":
+    print("====== FractureMNIST3D Data Inspection ======")
+    main()
