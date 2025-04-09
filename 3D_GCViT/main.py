@@ -48,9 +48,9 @@ def main():
                  depths = (2,2,2,2), #tuple of ints, number of transformer blocks at each level
                  mlp_ratio = 2, #multiplier for dim of mlp hidden layers
                  num_heads = (4,4,4,4), #tuple of ints, number of attention heads in each level
-                 num_classes = 8,
-                 window_size=(14, 14, 14, 14), #window size at each level, same length as depths
-                 window_size_pre=(7, 7, 14, 7), #window size for preprocessing
+                 num_classes = 3,
+                 window_size=(7, 7, 7, 7), #window size at each level, same length as depths
+                 window_size_pre=(7, 7, 7, 7), #window size for preprocessing
                  resolution=28,
                  drop_path_rate=0.2,
                  in_chans=1,
