@@ -8,7 +8,7 @@ from .units.permutation import _to_channel_last
 
 class FeatExtract(nn.Module):
     """
-    Feature extraction block based on: "Hatamizadeh et al.,                         Global Token Generator
+    Feature extraction block based on: "Hatamizadeh et al.,
     Global Context Vision Transformers <https://arxiv.org/abs/2206.09959>"
     """
 
@@ -21,14 +21,14 @@ class FeatExtract(nn.Module):
 
         super().__init__()
         self.conv = nn.Sequential(
-            nn.Conv2d(dim, dim, 3, 1, 1,
+            nn.Conv3d(dim, dim, 3, 1, 1,
                       groups=dim, bias=False),
             nn.GELU(),
             SE(dim, dim),
-            nn.Conv2d(dim, dim, 1, 1, 0, bias=False),
+            nn.Conv3d(dim, dim, 1, 1, 0, bias=False),
         )
         if not keep_dim:
-            self.pool = nn.MaxPool2d(kernel_size=3, stride=2, padding=1)
+            self.pool = nn.MaxPool3d(kernel_size=3, stride=2, padding=1)
         self.keep_dim = keep_dim
 
     def forward(self, x):
@@ -99,9 +99,9 @@ class GlobalQueryGen(nn.Module):
 
     def forward(self, x):
         x = self.to_q_global(x)
-        B, C, H, W = x.shape
-        if self.window_size != H or self.window_size !=W:
-            x = interpolate(x, size=(self.window_size, self.window_size), mode='bicubic')
+        B, C, H, W, D = x.shape
+        if self.window_size != H or self.window_size !=W or self.window_size != D:
+            x = interpolate(x, size=(self.window_size, self.window_size, self.window_size), mode='trilinear')
         x = _to_channel_last(x)
         x = x.reshape(B, 1, self.N, self.num_heads, self.dim_head).permute(0, 1, 3, 2, 4)
         return x
