@@ -89,7 +89,7 @@ class GCViTBlock(nn.Module):
         shifted_x = x
         x_windows = window_partition(shifted_x, self.window_size)  # nW*B, window_size, window_size, window_size, C
         x_windows = x_windows.view(-1, self.window_size * self.window_size * self.window_size, C)
-        _, d, h, w = x_windows.shape
+        #_, d, h, w = x_windows.shape
         attn_windows = self.attn(x_windows, q_global)
         shifted_x = window_reverse(attn_windows, self.window_size, Dp, Hp, Wp)  # B D' H' W' C
         x = shifted_x
