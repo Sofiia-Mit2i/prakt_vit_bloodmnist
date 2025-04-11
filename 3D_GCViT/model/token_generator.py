@@ -99,8 +99,8 @@ class GlobalQueryGen(nn.Module):
 
     def forward(self, x):
         x = self.to_q_global(x)
-        B, C, H, W, D = x.shape
-        if self.window_size != H or self.window_size !=W or self.window_size != D:
+        B, C, D, H, W = x.shape
+        if self.window_size != D or self.window_size != H or self.window_size !=W:
             x = interpolate(x, size=(self.window_size, self.window_size, self.window_size), mode='trilinear')
         x = _to_channel_last(x)
         x = x.reshape(B, 1, self.N, self.num_heads, self.dim_head).permute(0, 1, 3, 2, 4)
