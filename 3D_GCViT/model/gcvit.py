@@ -74,13 +74,13 @@ class GCViT(nn.Module):
                 S1 = int(L1 ** (1/3))
                 S2 = int(L2 ** (1/3))
                 relative_position_bias_table_pretrained_resized = torch.nn.functional.interpolate(
-                    relative_position_bias_table_pre.permute(1, 0).view(1, nH1, S1, S1, S1), size=(S2, S2, S2),
+                    relative_position_bias_table_pre.permute(1, 0).view(1, nH1, S1, S1), size=(S2, S2),
                     mode='trilinear')
                 relative_position_bias_table_pretrained_resized = relative_position_bias_table_pretrained_resized.view(nH1, L2).permute(1, 0)
                 block.attn.relative_position_bias_table = torch.nn.Parameter(relative_position_bias_table_pretrained_resized)
 
         # Classification head: 
-        # Global Average Pooling layer that converts [B, C, H, W, D] -> [B, C]
+        # Global Average Pooling layer that converts [B, C, D, H, W] -> [B, C]
         self.pool = nn.AdaptiveAvgPool3d((1, 1))
         # Fully connected layer for classification
         self.classifier = nn.Linear(self.num_features[-1], num_classes)
@@ -106,8 +106,8 @@ class GCViT(nn.Module):
         # Use the final output from the last level for classification
         final_output = outs[-1]  # Expected shape: [batch_size, channels, H, W, D]
         
-        # Apply Global Average Pooling to reduce [B, C, H, W] to [B, C]
-        pooled_output = self.pool(final_output)  # Now shape is [B, C, 1, 1, !]
+        # Apply Global Average Pooling to reduce [B, C, D, H, W] to [B, C]
+        pooled_output = self.pool(final_output)  # Now shape is [B, C, 1, 1, 1]
         pooled_output = pooled_output.view(pooled_output.size(0), -1)  # Flatten to [B, C]
         
         # Apply the classifier head to get logits for each class
