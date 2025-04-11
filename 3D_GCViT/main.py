@@ -26,11 +26,11 @@ def main():
     
     # Configuration
     hyperparams = {
-        'batch_size': 128,
+        'batch_size': 32,
         'num_workers': 4,
         'lr': 3e-4,
         'weight_decay': 0.01,
-        'num_epochs': 3,
+        'num_epochs': 10,
         'num_classes': 3  # FractureMNIST3D has 3 classes
     }
     

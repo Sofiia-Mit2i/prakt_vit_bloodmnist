@@ -200,7 +200,7 @@ def window_reverse(windows, window_size, D, H, W):
     Returns:
         x: (B, D, H, W, C)
     """
-    B = int(windows.shape[0] / (D * H * W / window_size * window_size * window_size))
+    B = int(windows.shape[0] / (D * H * W / (window_size * window_size * window_size)))
     x = windows.view(B,
                      D //window_size,
                      H // window_size, 

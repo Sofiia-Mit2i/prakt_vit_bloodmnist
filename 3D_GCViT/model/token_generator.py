@@ -93,7 +93,7 @@ class GlobalQueryGen(nn.Module):
             )
 
         self.num_heads = num_heads
-        self.N = window_size * window_size
+        self.N = window_size * window_size * window_size
         self.dim_head = dim // self.num_heads
         self.window_size = window_size
 

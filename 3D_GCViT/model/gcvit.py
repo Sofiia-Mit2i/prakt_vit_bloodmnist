@@ -71,17 +71,17 @@ class GCViT(nn.Module):
                 relative_position_bias_table_pre = block.attn.relative_position_bias_table
                 L1, nH1 = relative_position_bias_table_pre.shape
                 L2 = (2 * w_ - 1) ** 3
-                S1 = int(L1 ** (1/3))
-                S2 = int(L2 ** (1/3))
+                S1 = round(L1 ** (1/3))
+                S2 = round(L2 ** (1/3))
                 relative_position_bias_table_pretrained_resized = torch.nn.functional.interpolate(
-                    relative_position_bias_table_pre.permute(1, 0).view(1, nH1, S1, S1), size=(S2, S2),
+                    relative_position_bias_table_pre.permute(1, 0).view(1, nH1, S1, S1, S1), size=(S2, S2, S2),
                     mode='trilinear')
                 relative_position_bias_table_pretrained_resized = relative_position_bias_table_pretrained_resized.view(nH1, L2).permute(1, 0)
                 block.attn.relative_position_bias_table = torch.nn.Parameter(relative_position_bias_table_pretrained_resized)
 
         # Classification head: 
         # Global Average Pooling layer that converts [B, C, D, H, W] -> [B, C]
-        self.pool = nn.AdaptiveAvgPool3d((1, 1))
+        self.pool = nn.AdaptiveAvgPool3d(1)
         # Fully connected layer for classification
         self.classifier = nn.Linear(self.num_features[-1], num_classes)
 
@@ -96,7 +96,7 @@ class GCViT(nn.Module):
             if idx in self.out_indices:
                 norm_layer = getattr(self, f'norm{idx}')
                 x_out = norm_layer(xo)
-                outs.append(x_out.permute(0, 3, 1, 2).contiguous())
+                outs.append(x_out.permute(0, 4, 1, 2, 3).contiguous())
         return outs
 
     def forward(self, x):
