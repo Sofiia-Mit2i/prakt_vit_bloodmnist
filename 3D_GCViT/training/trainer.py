@@ -87,15 +87,23 @@ class GCViTTrainer:
                 else:
                     outputs = torch.softmax(outputs, dim=-1)
                 
-                y_true.extend(targets.numpy().tolist())
-                y_score.extend(outputs.numpy().tolist())
+                #y_true.extend(targets.numpy().tolist())
+                #y_score.extend(outputs.numpy().tolist())
     
+                y_true.extend([targets.numpy()] if isinstance(targets.numpy(), int) else targets.numpy().tolist())
+                y_score.extend([outputs.numpy()] if isinstance(outputs.numpy(), int) else outputs.numpy().tolist())
+
+
             # Convert to numpy arrays
             y_true = np.array(y_true)
             y_score = np.array(y_score)
-        
+
             # MedMNIST Evaluator
             evaluator = Evaluator(self.data_flag, split)
+
+            print("Predicted shape:", y_score.shape)
+            print("Evaluator labels shape:", evaluator.labels.shape)
+
             metrics = evaluator.evaluate(y_score)
 
             # Extract metrics

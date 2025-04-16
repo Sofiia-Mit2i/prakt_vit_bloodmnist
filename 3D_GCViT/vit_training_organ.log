@@ -1,0 +1,45 @@
+2025-04-16 13:23:55,534 - INFO - Starting OrganMNIST3D GCViT Training Pipeline
+2025-04-16 13:23:55,535 - INFO - Using device: cpu
+2025-04-16 13:23:55,535 - INFO - Initializing data pipelines...
+2025-04-16 13:23:57,506 - INFO - Building Global Context Vision Transformer...
+2025-04-16 13:23:57,603 - INFO - Beginning training process...
+2025-04-16 13:23:57,603 - INFO - Starting training...
+2025-04-16 13:25:47,029 - INFO - Epoch 1 - Train Loss: 1.0797
+2025-04-16 13:26:04,704 - INFO - TEST  AUC: 0.962  ACC: 0.715
+2025-04-16 13:26:04,761 - INFO - New best model saved with AUC: 0.962, ACC: 0.715
+2025-04-16 13:27:57,442 - INFO - Epoch 2 - Train Loss: 0.2988
+2025-04-16 13:28:15,426 - INFO - TEST  AUC: 0.971  ACC: 0.779
+2025-04-16 13:28:15,481 - INFO - New best model saved with AUC: 0.971, ACC: 0.779
+2025-04-16 13:30:08,225 - INFO - Epoch 3 - Train Loss: 0.0911
+2025-04-16 13:30:26,445 - INFO - TEST  AUC: 0.972  ACC: 0.766
+2025-04-16 13:30:26,517 - INFO - New best model saved with AUC: 0.972, ACC: 0.766
+2025-04-16 13:32:19,951 - INFO - Epoch 4 - Train Loss: 0.0358
+2025-04-16 13:32:38,381 - INFO - TEST  AUC: 0.971  ACC: 0.787
+2025-04-16 13:34:45,971 - INFO - Epoch 5 - Train Loss: 0.0299
+2025-04-16 13:35:04,295 - INFO - TEST  AUC: 0.977  ACC: 0.787
+2025-04-16 13:35:04,355 - INFO - New best model saved with AUC: 0.977, ACC: 0.787
+2025-04-16 13:35:04,356 - INFO - ==> Final Evaluation <==
+2025-04-16 13:35:33,332 - ERROR - Training failed: 'int' object is not iterable
+2025-04-16 13:35:33,332 - ERROR - Main execution failed: 'int' object is not iterable
+2025-04-16 13:39:11,455 - INFO - Starting OrganMNIST3D GCViT Training Pipeline
+2025-04-16 13:39:11,460 - INFO - Using device: cpu
+2025-04-16 13:39:11,460 - INFO - Initializing data pipelines...
+2025-04-16 13:39:16,448 - INFO - Building Global Context Vision Transformer...
+2025-04-16 13:39:16,650 - INFO - Beginning training process...
+2025-04-16 13:39:16,650 - INFO - Starting training...
+2025-04-16 13:41:27,748 - INFO - Epoch 1 - Train Loss: 1.0480
+2025-04-16 13:41:45,730 - INFO - TEST  AUC: 0.955  ACC: 0.697
+2025-04-16 13:41:45,792 - INFO - New best model saved with AUC: 0.955, ACC: 0.697
+2025-04-16 13:43:38,883 - INFO - Epoch 2 - Train Loss: 0.3291
+2025-04-16 13:43:57,971 - INFO - TEST  AUC: 0.969  ACC: 0.774
+2025-04-16 13:43:58,027 - INFO - New best model saved with AUC: 0.969, ACC: 0.774
+2025-04-16 13:45:55,893 - INFO - Epoch 3 - Train Loss: 0.0925
+2025-04-16 13:46:14,280 - INFO - TEST  AUC: 0.973  ACC: 0.770
+2025-04-16 13:46:14,346 - INFO - New best model saved with AUC: 0.973, ACC: 0.770
+2025-04-16 13:48:07,773 - INFO - Epoch 4 - Train Loss: 0.0540
+2025-04-16 13:48:31,038 - INFO - TEST  AUC: 0.971  ACC: 0.779
+2025-04-16 13:50:33,740 - INFO - Epoch 5 - Train Loss: 0.0670
+2025-04-16 13:50:56,352 - INFO - TEST  AUC: 0.966  ACC: 0.769
+2025-04-16 13:50:56,353 - INFO - ==> Final Evaluation <==
+2025-04-16 13:51:29,261 - ERROR - Training failed: 'int' object is not iterable
+2025-04-16 13:51:29,261 - ERROR - Main execution failed: 'int' object is not iterable

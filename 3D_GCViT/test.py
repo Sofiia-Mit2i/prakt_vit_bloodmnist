@@ -1,6 +1,6 @@
 import torch
 from torch.utils.data import DataLoader
-from medmnist import FractureMNIST3D
+from medmnist import VesselMNIST3D
 import numpy as np
 
 def print_dataset_stats(dataset, name):
@@ -30,8 +30,8 @@ def print_dataset_stats(dataset, name):
 
 def main():
     # Initialize dataset
-    train_dataset = FractureMNIST3D(split='train', download=True)
-    test_dataset = FractureMNIST3D(split='test', download=True)
+    train_dataset = VesselMNIST3D(split='train', download=True)
+    test_dataset = VesselMNIST3D(split='test', download=True)
     
     # Print dataset stats
     print_dataset_stats(train_dataset, "Training")
@@ -56,5 +56,5 @@ def main():
     print(f"Std: {train_batch[0].std().item():.4f}")
 
 if __name__ == "__main__":
-    print("====== FractureMNIST3D Data Inspection ======")
+    print("====== VesselMNIST3D Data Inspection ======")
     main()

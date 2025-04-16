@@ -4,9 +4,9 @@ import logging
 from torch import nn, optim
 from torch.utils.data import DataLoader
 import torchvision.transforms as transforms
-from medmnist import FractureMNIST3D
+from medmnist import VesselMNIST3D
 from model.gcvit import GCViT
-from data.dataset import get_dataloaders
+from data.VESSELmnist import get_dataloaders
 from training.trainer import GCViTTrainer
 from tqdm import tqdm
 
@@ -15,7 +15,7 @@ logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler("vit_training.log"),
+        logging.FileHandler("vit_training_vessel.log"),
         logging.StreamHandler()
     ]
 )
@@ -26,12 +26,12 @@ def main():
     
     # Configuration
     hyperparams = {
-        'batch_size': 8, #32,
+        'batch_size': 10, #32,
         'num_workers': 4,
         'lr': 9e-5, # 3e-4,
-        'weight_decay': 0.02, #0.01,
+        'weight_decay': 0.01, #0.01,
         'num_epochs': 5,
-        'num_classes': 3  # FractureMNIST3D has 3 classes
+        'num_classes': 2 # VesselMNIST3D has 2 classes
     }
     
     try:
@@ -45,10 +45,10 @@ def main():
         # Model initialization
         logging.info("Building Global Context Vision Transformer...")
         model = GCViT(dim = 64, #embedding dimension
-                 depths = (3,4,6,5), #tuple of ints, number of transformer blocks at each level
-                 mlp_ratio = 2, #multiplier for dim of mlp hidden layers
+                 depths = (2,3,4,5), #tuple of ints, number of transformer blocks at each level
+                 mlp_ratio = 3, #multiplier for dim of mlp hidden layers
                  num_heads = (2,4,4,4), #tuple of ints, number of attention heads in each level
-                 num_classes = 3,
+                 num_classes = 2,
                  window_size=(7, 7, 7, 7), #window size at each level, same length as depths
                  window_size_pre=(7, 7, 7, 7), #window size for preprocessing
                  resolution=28,
@@ -73,8 +73,8 @@ def main():
             train_loader_at_eval=train_loader_at_eval,
             device=device,
             hyperparams=hyperparams,
-            task='multi-class',
-            data_flag='fracturemnist3d'
+            task='binary-class',
+            data_flag='vesselmnist3d'
         )
         
         # Start training
@@ -88,6 +88,6 @@ def main():
         raise
 
 if __name__ == "__main__":
-    logging.info("Starting FractureMNIST3D GCViT Training Pipeline")
+    logging.info("Starting VesselMNIST3D GCViT Training Pipeline")
     main()
     logging.info("Training process completed successfully")
