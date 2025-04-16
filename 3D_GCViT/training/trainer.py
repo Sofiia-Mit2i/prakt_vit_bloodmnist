@@ -55,11 +55,6 @@ class GCViTTrainer:
             # Forward pass
             self.optimizer.zero_grad()
             outputs = self.model(inputs)
-            #print(outputs)
-            #print(outputs[-1])
-            #print(type(outputs))
-            #print(type(outputs[-1]))
-            #outputs = outputs[-1]
             loss = self.criterion(outputs, targets)
             
             # Backward pass
@@ -83,13 +78,8 @@ class GCViTTrainer:
         with torch.no_grad():
             for inputs, targets in data_loader:
                 inputs = inputs.to(self.device)
-                #print(inputs.shape)
-                #print(inputs.size())
                 outputs = self.model(inputs).cpu()
-                #print(outputs.size())
                 targets = targets.cpu().squeeze().long()
-                #print(targets.size())
-                
                 
                 # Process outputs based on task
                 if self.task == 'multi-label, binary-class':  
@@ -122,9 +112,11 @@ class GCViTTrainer:
             torch.save(self.model.state_dict(), "best_model.pth")
             logger.info(f"New best model saved with AUC: {auc_score:.3f}, ACC: {acc_score:.3f}")
 
-    def train(self):
+    def train(self, return_best_val_AUC=False):
         try:
             logger.info("Starting training...")
+            best_auc = 0.0
+
             for epoch in range(self.hyperparams['num_epochs']):
                 # Train one epoch
                 train_loss = self.train_epoch(epoch)
@@ -133,6 +125,9 @@ class GCViTTrainer:
                 # Validate and save
                 val_metrics = self.evaluate('test')
                 self.save_checkpoint(val_metrics)
+
+                if val_metrics[0] > best_auc:  # index 0 = AUC
+                    best_auc = val_metrics[0]
             
             # Final evaluation
             logger.info("==> Final Evaluation <==")
@@ -141,6 +136,9 @@ class GCViTTrainer:
             
             logger.info(f"Training complete. Best model: AUC {self.best_metrics['auc']:.3f}, ACC {self.best_metrics['acc']:.3f}")
             
+            if return_best_val_AUC:
+                return best_auc
+
         except Exception as e:
             logger.error(f"Training failed: {str(e)}")
             raise

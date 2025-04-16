@@ -26,11 +26,11 @@ def main():
     
     # Configuration
     hyperparams = {
-        'batch_size': 32,
+        'batch_size': 8, #32,
         'num_workers': 4,
-        'lr': 3e-4,
-        'weight_decay': 0.01,
-        'num_epochs': 10,
+        'lr': 9e-5, # 3e-4,
+        'weight_decay': 0.02, #0.01,
+        'num_epochs': 3,
         'num_classes': 3  # FractureMNIST3D has 3 classes
     }
     
@@ -44,10 +44,10 @@ def main():
         
         # Model initialization
         logging.info("Building Global Context Vision Transformer...")
-        model = GCViT(dim = 56, #embedding dimension
-                 depths = (2,2,2,2), #tuple of ints, number of transformer blocks at each level
-                 mlp_ratio = 2, #multiplier for dim of mlp hidden layers
-                 num_heads = (4,4,4,4), #tuple of ints, number of attention heads in each level
+        model = GCViT(dim = 64, #embedding dimension
+                 depths = (3,4,6,5), #tuple of ints, number of transformer blocks at each level
+                 mlp_ratio = 3, #multiplier for dim of mlp hidden layers
+                 num_heads = (2,4,4,8), #tuple of ints, number of attention heads in each level
                  num_classes = 3,
                  window_size=(7, 7, 7, 7), #window size at each level, same length as depths
                  window_size_pre=(7, 7, 7, 7), #window size for preprocessing
@@ -56,10 +56,10 @@ def main():
                  in_chans=1,
                  qkv_bias=True,
                  qk_scale=None,
-                 drop_rate=0.,
-                 attn_drop_rate=0.,
+                 drop_rate=0.1,
+                 attn_drop_rate=0.1,
                  norm_layer=nn.LayerNorm,
-                 layer_scale=None,
+                 layer_scale=None,	
                  out_indices=(0,1,2,3),
                  frozen_stages=-1,
                  pretrained=None,
