@@ -69,9 +69,9 @@ class GCViT(nn.Module):
             for block in level.blocks:
                 w_ = block.attn.window_size[0]
                 relative_position_bias_table_pre = block.attn.relative_position_bias_table
-                L1, nH1 = relative_position_bias_table_pre.shape
-                L2 = (2 * w_ - 1) ** 3
-                S1 = round(L1 ** (1/3))
+                L1, nH1 = relative_position_bias_table_pre.shape #computed relative positional bias
+                L2 = (2 * w_ - 1) ** 3 #currently needed rel. pos. bias
+                S1 = round(L1 ** (1/3)) #window size
                 S2 = round(L2 ** (1/3))
                 relative_position_bias_table_pretrained_resized = torch.nn.functional.interpolate(
                     relative_position_bias_table_pre.permute(1, 0).view(1, nH1, S1, S1, S1), size=(S2, S2, S2),

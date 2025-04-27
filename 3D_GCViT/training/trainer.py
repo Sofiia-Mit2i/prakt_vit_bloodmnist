@@ -79,7 +79,7 @@ class GCViTTrainer:
             for inputs, targets in data_loader:
                 inputs = inputs.to(self.device)
                 outputs = self.model(inputs).cpu()
-                targets = targets.cpu().squeeze().long()
+                targets = targets.cpu().view(-1).long()
                 
                 # Process outputs based on task
                 if self.task == 'multi-label, binary-class':  
@@ -87,11 +87,11 @@ class GCViTTrainer:
                 else:
                     outputs = torch.softmax(outputs, dim=-1)
                 
-                #y_true.extend(targets.numpy().tolist())
-                #y_score.extend(outputs.numpy().tolist())
+                y_true.extend(targets.numpy().tolist())
+                y_score.extend(outputs.numpy().tolist())
     
-                y_true.extend([targets.numpy()] if isinstance(targets.numpy(), int) else targets.numpy().tolist())
-                y_score.extend([outputs.numpy()] if isinstance(outputs.numpy(), int) else outputs.numpy().tolist())
+                #y_true.extend([targets.numpy()] if isinstance(targets.numpy(), int) else targets.numpy().tolist())
+                #y_score.extend([outputs.numpy()] if isinstance(outputs.numpy(), int) else outputs.numpy().tolist())
 
 
             # Convert to numpy arrays

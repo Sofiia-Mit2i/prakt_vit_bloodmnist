@@ -28,9 +28,9 @@ def main():
     hyperparams = {
         'batch_size': 10, #32,
         'num_workers': 4,
-        'lr': 9e-5, # 3e-4,
+        'lr': 3e-4, # 3e-4,
         'weight_decay': 0.01, #0.01,
-        'num_epochs': 5,
+        'num_epochs': 10,
         'num_classes': 2 # VesselMNIST3D has 2 classes
     }
     
@@ -45,9 +45,9 @@ def main():
         # Model initialization
         logging.info("Building Global Context Vision Transformer...")
         model = GCViT(dim = 64, #embedding dimension
-                 depths = (2,3,4,5), #tuple of ints, number of transformer blocks at each level
+                 depths = (2,2,2,2), #tuple of ints, number of transformer blocks at each level
                  mlp_ratio = 3, #multiplier for dim of mlp hidden layers
-                 num_heads = (2,4,4,4), #tuple of ints, number of attention heads in each level
+                 num_heads = (4,4,4,4), #tuple of ints, number of attention heads in each level
                  num_classes = 2,
                  window_size=(7, 7, 7, 7), #window size at each level, same length as depths
                  window_size_pre=(7, 7, 7, 7), #window size for preprocessing
