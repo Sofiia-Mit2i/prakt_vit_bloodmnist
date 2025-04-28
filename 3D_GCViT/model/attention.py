@@ -38,22 +38,29 @@ class WindowAttention(nn.Module):
         self.window_size_pre = window_size_pre
         self.window_size = (window_size, window_size, window_size)  # Wd, Wh, Ww
         window_size = (window_size_pre, window_size_pre, window_size_pre)
+
         self.relative_position_bias_table = nn.Parameter(
             torch.zeros((2 * window_size[0] - 1) * (2 * window_size[1] - 1) * (2 * window_size[2] - 1), num_heads))  # 2*Wd-1 * 2*Wh-1 * 2*Ww-1, nH
         # get pair-wise relative position index for each token inside the window
+        
         coords_d = torch.arange(self.window_size[0])
         coords_h = torch.arange(self.window_size[1])
         coords_w = torch.arange(self.window_size[2])
         coords = torch.stack(torch.meshgrid([coords_d, coords_h, coords_w]))  # 3, Wd, Wh, Ww
+
         coords_flatten = torch.flatten(coords, 1)  # 3, Wd*Wh*Ww
+
         relative_coords = coords_flatten[:, :, None] - coords_flatten[:, None, :]  # 3, Wd*Wh*Ww, Wd*Wh*Ww
         relative_coords = relative_coords.permute(1, 2, 0).contiguous()  # Wd*Wh*Ww, Wd*Wh*Ww, 3
+
         relative_coords[:, :, 0] += self.window_size[0] - 1  # shift to start from 0
         relative_coords[:, :, 1] += self.window_size[1] - 1
         relative_coords[:, :, 2] += self.window_size[2] - 1
+
         relative_coords[:, :, 0] *= (2 * self.window_size[1] - 1) * (2 * self.window_size[2] - 1) # scaling for unique sum
         relative_coords[:, :, 1] *= 2 * self.window_size[2] - 1
         relative_position_index = relative_coords.sum(-1)  # Wd*Wh*Ww, Wd*Wh*Ww
+
         self.register_buffer("relative_position_index", relative_position_index)
         self.qkv = nn.Linear(dim, dim * 3, bias=qkv_bias)
         self.attn_drop = nn.Dropout(attn_drop)
@@ -106,7 +113,7 @@ class WindowAttentionGlobal(nn.Module):
             num_heads: number of attention head.
             window_size: window size.
             qkv_bias: bool argument for query, key, value learnable bias.
-            qk_scale: bool argument to scaling query, key.
+            qk_scale: optional float for scaling query, key.
             attn_drop: attention dropout rate.
             proj_drop: output dropout rate.
         """
@@ -117,11 +124,13 @@ class WindowAttentionGlobal(nn.Module):
         self.scale = qk_scale or head_dim ** -0.5
         self.use_rel_pos_bias = use_rel_pos_bias
         self.window_size_pre = window_size_pre
+
         self.window_size = (window_size, window_size, window_size)  # Wd, Wh, Ww
         window_size = (window_size_pre, window_size_pre, window_size_pre)
         self.relative_position_bias_table = nn.Parameter(
             torch.zeros((2 * window_size[0] - 1) * (2 * window_size[1] - 1) * (2 * window_size[2] - 1), num_heads))  # 2*Wd-1 * 2*Wh-1 * 2*Ww-1, nH
         # get pair-wise relative position index for each token inside the window
+
         coords_d = torch.arange(self.window_size[0])
         coords_h = torch.arange(self.window_size[1])
         coords_w = torch.arange(self.window_size[2])
